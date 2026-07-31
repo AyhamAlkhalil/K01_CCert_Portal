@@ -189,6 +189,7 @@ export const Layout = ({ children }: LayoutProps) => {
     location.pathname.startsWith('/settings')
   );
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [passwordDialogOpen, setPasswordDialogOpen] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
@@ -218,6 +219,7 @@ export const Layout = ({ children }: LayoutProps) => {
                     user={user}
                     handleSignOut={handleSignOut}
                     onNavClick={() => setSheetOpen(false)}
+                    onChangePassword={() => setPasswordDialogOpen(true)}
                   />
                 </div>
               </SheetContent>
@@ -281,6 +283,7 @@ export const Layout = ({ children }: LayoutProps) => {
             })}
           </nav>
         )}
+        <ChangePasswordDialog open={passwordDialogOpen} onOpenChange={setPasswordDialogOpen} />
       </div>
     );
   }
@@ -296,6 +299,7 @@ export const Layout = ({ children }: LayoutProps) => {
           setSettingsOpen={setSettingsOpen}
           user={user}
           handleSignOut={handleSignOut}
+          onChangePassword={() => setPasswordDialogOpen(true)}
         />
       </aside>
 
@@ -309,6 +313,7 @@ export const Layout = ({ children }: LayoutProps) => {
           </div>
         )}
       </main>
+      <ChangePasswordDialog open={passwordDialogOpen} onOpenChange={setPasswordDialogOpen} />
     </div>
   );
 };
