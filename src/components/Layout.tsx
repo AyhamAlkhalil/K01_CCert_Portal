@@ -157,13 +157,13 @@ const SidebarContent = ({
         <Button
           variant="ghost"
           size="sm"
-          className="w-full justify-start gap-2"
+          className="w-full justify-start gap-2 text-sidebar-foreground hover:text-sidebar-foreground hover:bg-sidebar-accent"
           onClick={() => {
             onNavClick?.();
             onChangePassword();
           }}
         >
-          <KeyRound className="h-4 w-4" />
+          <KeyRound className="h-4 w-4 shrink-0" />
           Passwort ändern
         </Button>
         <Button
