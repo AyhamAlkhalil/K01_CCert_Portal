@@ -18,6 +18,7 @@ import {
   History,
   Bot,
   CheckSquare,
+  KeyRound,
 } from 'lucide-react';
 import logo from '@/assets/logo-navy.jpg';
 import { useAuth } from '@/contexts/AuthContext';
@@ -35,6 +36,7 @@ import {
 } from './ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useScrollPersistence } from '@/hooks/useScrollPersistence';
+import { ChangePasswordDialog } from './ChangePasswordDialog';
 
 interface LayoutProps {
   children?: ReactNode;
@@ -65,6 +67,7 @@ const SidebarContent = ({
   user,
   handleSignOut,
   onNavClick,
+  onChangePassword,
 }: {
   location: ReturnType<typeof useLocation>;
   settingsOpen: boolean;
@@ -72,6 +75,7 @@ const SidebarContent = ({
   user: User | null;
   handleSignOut: () => void;
   onNavClick?: () => void;
+  onChangePassword: () => void;
 }) => {
   const isSettingsActive = location.pathname.startsWith('/settings');
 
@@ -150,6 +154,18 @@ const SidebarContent = ({
         <div className="text-sm text-muted-foreground truncate px-2">
           {user?.email}
         </div>
+        <Button
+          variant="ghost"
+          size="sm"
+          className="w-full justify-start gap-2"
+          onClick={() => {
+            onNavClick?.();
+            onChangePassword();
+          }}
+        >
+          <KeyRound className="h-4 w-4" />
+          Passwort ändern
+        </Button>
         <Button
           variant="ghost"
           size="sm"
