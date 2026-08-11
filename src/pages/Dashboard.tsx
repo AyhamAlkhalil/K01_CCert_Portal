@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users, Building2 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ExpiringCertificationsCard } from "@/components/ExpiringCertificationsCard";
+import { ExpiringWithoutAuditCard } from "@/components/ExpiringWithoutAuditCard";
 import { DataQualityWarningsCard } from "@/components/DataQualityWarningsCard";
 import { AuditYearStatsCard } from "@/components/AuditYearStatsCard";
 import { CertificationYearStatsCard } from "@/components/CertificationYearStatsCard";
@@ -177,6 +178,7 @@ const Dashboard = () => {
 
       {/* Rows: Expiring and Quality */}
       <div className="grid grid-cols-1 gap-6">
+        <ExpiringWithoutAuditCard />
         <ExpiringCertificationsCard />
         <DataQualityWarningsCard />
       </div>
