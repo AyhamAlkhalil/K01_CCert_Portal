@@ -50,7 +50,8 @@ import {
   ArrowRightLeft,
   Trash2,
   Pencil,
-  Monitor
+  Monitor,
+  Download
 } from 'lucide-react';
 import {
   DropdownMenu,
@@ -71,6 +72,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
+import { exportClientsToExcel } from '@/lib/clientExport';
 
 
 const AUDIT_MODE_CONFIG = {
@@ -589,6 +591,13 @@ const Clients = () => {
             </p>
           </div>
           <div className="flex gap-2 flex-wrap">
+            <Button size="sm" variant="outline" disabled={clients.length === 0} onClick={() => {
+              exportClientsToExcel(clients);
+              toast.success(`${clients.length} Kunden exportiert`);
+            }}>
+              <Download className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline text-xs sm:text-sm">Excel-Export</span>
+            </Button>
             <Button size="sm" variant="outline" onClick={() => {
               const allCountryIds = new Set(countryGroups.map(cg => cg.country));
               const allGroupIds = new Set(countryGroups.flatMap(cg => cg.companyGroups.map(g => g.id)));
