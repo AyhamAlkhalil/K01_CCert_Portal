@@ -252,12 +252,12 @@ Located in `supabase/functions/`:
 
 ### Architektur — Agentic SQL-Loop
 
-Der Assistent nutzt **GPT-4o mit Tool-Use in einem Loop** — kein statisches Keyword-Matching, kein Pre-Fetching.
+Der Assistent nutzt **`gpt-6.1-sol` (OpenAI Responses API, `reasoning.effort: low`) mit Tool-Use in einem Loop** — kein statisches Keyword-Matching, kein Pre-Fetching. Jeder Schritt wird gestreamt (`store: false`, Reasoning-Items werden verschlüsselt zurückgegeben).
 
 **Flow:**
-1. User-Nachricht → GPT-4o mit System-Prompt + `execute_sql` Tool
+1. User-Nachricht → Modell mit System-Prompt (`instructions`) + `execute_sql` Tool
 2. KI entscheidet selbst welche SQL-Query sie braucht und führt sie aus
-3. Ergebnis geht zurück an KI → weitere Queries wenn nötig (max. 6 Iterationen)
+3. Ergebnis geht zurück an KI → weitere Queries wenn nötig (max. 5 Iterationen, letzte ohne Tools)
 4. Finale Antwort wird als SSE gestreamt
 
 **Dateien:**
@@ -294,7 +294,7 @@ Migration-Datei: `supabase/migrations/20260422000002_chat_execute_sql.sql`
 
 | Key | Zweck |
 |-----|-------|
-| `OPENAI_API_KEY` | GPT-4o für Router + Antwort |
+| `OPENAI_API_KEY` | `gpt-6.1-sol` für Agent-Loop + Antwort |
 | `SUPABASE_URL` | automatisch gesetzt |
 | `SUPABASE_ANON_KEY` | automatisch gesetzt |
 | `SUPABASE_SERVICE_ROLE_KEY` | automatisch gesetzt |
@@ -317,6 +317,7 @@ Beim Anpassen des System-Prompts (`buildSystemPrompt` in der Edge Function) folg
 |-----|---------|-----|
 | "Keine überfälligen Tasks" obwohl welche da | KI schreibt `status = 'overdue'` | Geschäftslogik im System-Prompt dokumentieren |
 | Edge Function zeigt alten Stand | Lovable deployed EF nicht automatisch | Manuell im Supabase Dashboard deployen |
+| Tool-Calls schlagen nach Modellwechsel fehl | GPT-5.6/GPT-6-Modelle unterstützen Function Calling nicht über `/v1/chat/completions` | Nur `/v1/responses` verwenden (Tool-Format flach: `{type, name, parameters}`) |
 | IDE zeigt Deno-Fehler in `index.ts` | VS Code nutzt Node-Compiler, kennt `deno.land`-Imports nicht | False Positives — `npx tsc --noEmit` ist korrekt und zeigt keine Fehler |
 
 ---

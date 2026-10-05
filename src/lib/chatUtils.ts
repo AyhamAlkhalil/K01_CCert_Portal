@@ -14,9 +14,10 @@ interface StreamChatParams {
   onDone: () => void;
   onError: (error: string) => void;
   onAgentSelected?: (agent: AgentInfo, reasoning: string) => void;
+  onThinking?: (text: string) => void;
 }
 
-export async function streamChat({ messages, onDelta, onDone, onError, onAgentSelected }: StreamChatParams) {
+export async function streamChat({ messages, onDelta, onDone, onError, onAgentSelected, onThinking }: StreamChatParams) {
   try {
     const { data: { session } } = await supabase.auth.getSession();
     if (!session?.access_token) {
@@ -76,6 +77,25 @@ export async function streamChat({ messages, onDelta, onDone, onError, onAgentSe
             } catch { /* ignore */ }
             currentEventType = "";
             continue;
+          }
+
+          if (currentEventType === "thinking") {
+            try {
+              const t = JSON.parse(jsonStr) as { text?: string };
+              if (t.text && onThinking) onThinking(t.text);
+            } catch { /* ignore */ }
+            currentEventType = "";
+            continue;
+          }
+
+          if (currentEventType === "error") {
+            try {
+              const err = JSON.parse(jsonStr) as { error?: string };
+              if (err.error) onError(err.error);
+            } catch { /* ignore */ }
+            currentEventType = "";
+            streamDone = true;
+            break;
           }
 
           if (jsonStr === "[DONE]") { streamDone = true; break; }

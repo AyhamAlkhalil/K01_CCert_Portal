@@ -95,7 +95,7 @@ const MessageBubble = memo(({ message }: { message: Message }) => (
 
 MessageBubble.displayName = 'MessageBubble';
 
-const TypingIndicator = memo(({ agent }: { agent?: AgentInfo | null }) => (
+const TypingIndicator = memo(({ agent, thinkingText }: { agent?: AgentInfo | null; thinkingText?: string | null }) => (
   <div className="flex gap-2 items-start">
     <div className="bg-primary/10 p-1.5 rounded-full">
       <Bot className="h-4 w-4 text-primary" />
@@ -103,11 +103,15 @@ const TypingIndicator = memo(({ agent }: { agent?: AgentInfo | null }) => (
     <div className="flex flex-col gap-0.5">
       {agent && <AgentBadge agent={agent} />}
       <div className="bg-muted px-4 py-2 rounded-xl rounded-bl-sm">
-        <div className="flex gap-1">
-          <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-          <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-          <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-        </div>
+        {thinkingText ? (
+          <span className="text-xs text-muted-foreground animate-pulse">{thinkingText}</span>
+        ) : (
+          <div className="flex gap-1">
+            <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+            <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+            <span className="w-2 h-2 bg-muted-foreground/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+          </div>
+        )}
       </div>
     </div>
   </div>
@@ -121,6 +125,7 @@ const ChatBot = () => {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [activeAgent, setActiveAgent] = useState<AgentInfo | null>(null);
+  const [thinkingText, setThinkingText] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -144,6 +149,7 @@ const ChatBot = () => {
     setInput('');
     setIsTyping(true);
     setActiveAgent(null);
+    setThinkingText(null);
 
     const conversationHistory = messages
       .filter(m => m.id !== 'initial')
@@ -181,10 +187,15 @@ const ChatBot = () => {
         selectedAgent = agent;
         setActiveAgent(agent);
       },
-      onDelta: upsertAssistant,
+      onThinking: (text) => setThinkingText(text),
+      onDelta: (chunk) => {
+        setThinkingText(null);
+        upsertAssistant(chunk);
+      },
       onDone: () => {
         setIsTyping(false);
         setActiveAgent(null);
+        setThinkingText(null);
       },
       onError: (error) => {
         toast.error(error);
@@ -199,6 +210,7 @@ const ChatBot = () => {
         ]);
         setIsTyping(false);
         setActiveAgent(null);
+        setThinkingText(null);
       },
     });
   }, [input, isTyping, messages]);
@@ -244,7 +256,7 @@ const ChatBot = () => {
                 <MessageBubble key={message.id} message={message} />
               ))}
               {isTyping && messages[messages.length - 1]?.role !== 'assistant' && (
-                <TypingIndicator agent={activeAgent} />
+                <TypingIndicator agent={activeAgent} thinkingText={thinkingText} />
               )}
             </div>
           </ScrollArea>
