@@ -277,7 +277,7 @@ export const OutlookIntegration = ({ auditCount = 0, audits = [] }: OutlookInteg
           </div>
           <Badge variant={isConnected ? "default" : "secondary"} className={cn(
             "shrink-0 whitespace-nowrap",
-            isConnected && "bg-success/10 text-success border-success/20"
+            isConnected && "bg-success/[0.12] text-success border-success/30"
           )}>
             {isConnected ? "Verbunden" : "Nicht verbunden"}
           </Badge>

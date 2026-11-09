@@ -280,12 +280,13 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
     <>
       {/* Hero-style centered input */}
       <div className={cn("relative", className)}>
-        <div className="rounded-2xl border border-border/80 bg-card shadow-sm overflow-hidden">
+        <div className="relative rounded-2xl border border-primary/15 bg-gradient-to-br from-primary/[0.07] via-card to-teal-400/[0.10] shadow-sm overflow-hidden">
+          <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary via-sky-400 to-teal-400" />
           <div className="px-4 py-6 sm:px-10 sm:py-8">
             {/* Greeting */}
             <div className="flex items-start sm:items-center gap-3 mb-5 justify-center max-w-2xl mx-auto">
-              <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary flex items-center justify-center shadow-sm">
-                <Sparkles className="h-4 w-4 sm:h-[18px] sm:w-[18px] text-primary-foreground" />
+              <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-primary via-sky-500 to-teal-400 flex items-center justify-center shadow-md shadow-primary/30">
+                <Sparkles className="h-4 w-4 sm:h-[18px] sm:w-[18px] text-white animate-pulse" />
               </div>
               <div className="min-h-[1.5rem] flex-1">
                 {greeting ? (
@@ -310,7 +311,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
                 className="relative cursor-text group/input"
                 onClick={handleHeroInputFocus}
               >
-                <div className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-lg bg-primary/[0.08] group-hover/input:bg-primary/[0.14] transition-colors">
+                <div className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-br from-primary/15 to-teal-400/25 group-hover/input:from-primary/25 group-hover/input:to-teal-400/40 transition-colors">
                   <Bot className="h-4 w-4 text-primary" />
                 </div>
                 <Input
@@ -318,11 +319,11 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
                   onChange={handleHeroInputChange}
                   onFocus={handleHeroInputFocus}
                   placeholder="Wie kann ich dir heute helfen?"
-                  className="pl-12 sm:pl-14 pr-12 sm:pr-14 h-12 sm:h-14 bg-background rounded-xl text-sm sm:text-[15px] shadow-none hover:shadow-sm focus-visible:shadow-sm transition-all placeholder:text-muted-foreground"
+                  className="pl-12 sm:pl-14 pr-12 sm:pr-14 h-12 sm:h-14 bg-card border-primary/25 rounded-xl text-sm sm:text-[15px] shadow-none hover:shadow-sm focus-visible:shadow-sm transition-all placeholder:text-muted-foreground"
                   readOnly
                 />
                 <div className="absolute right-2 sm:right-2.5 top-1/2 -translate-y-1/2">
-                  <div className="h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
+                  <div className="h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center rounded-lg bg-gradient-to-br from-primary to-teal-500 text-white shadow-md shadow-primary/30">
                     <Send className="h-4 w-4" />
                   </div>
                 </div>
@@ -342,7 +343,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
 
           {/* Header */}
           <div className="flex items-center gap-3 px-4 sm:px-6 py-4 border-b border-border/70 bg-card safe-top">
-            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary via-sky-500 to-teal-400 flex items-center justify-center shadow-md shadow-primary/30">
               <Sparkles className="h-4 w-4 text-primary-foreground" />
             </div>
             <div className="flex-1 min-w-0">
@@ -365,7 +366,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-3 sm:px-5 py-3 sm:py-4 space-y-3 sm:space-y-4 min-h-0">
             {greeting && (
               <div className="flex gap-3 justify-start">
-                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mt-0.5">
+                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-primary/15 to-teal-400/25 flex items-center justify-center mt-0.5">
                   <Bot className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <div className="max-w-[80%] rounded-2xl rounded-bl-md bg-muted/60 px-4 py-2.5 text-sm">
@@ -382,7 +383,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
                   <button
                     key={i}
                     onClick={() => handleExampleClick(prompt)}
-                    className="text-xs px-3 py-1.5 rounded-full border border-border bg-card text-muted-foreground hover:bg-accent hover:text-foreground hover:border-foreground/20 transition-colors"
+                    className="text-xs px-3 py-1.5 rounded-full border border-border bg-card text-muted-foreground hover:bg-accent hover:text-accent-foreground hover:border-primary/30 transition-colors"
                   >
                     {prompt}
                   </button>
@@ -393,7 +394,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
             {conversationHistory.map((msg, i) => (
               <div key={i} className={cn("flex gap-3", msg.role === 'user' ? 'justify-end' : 'justify-start')}>
                 {msg.role === 'assistant' && (
-                  <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mt-0.5">
+                  <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-primary/15 to-teal-400/25 flex items-center justify-center mt-0.5">
                     <Bot className="h-3.5 w-3.5 text-primary" />
                   </div>
                 )}
@@ -427,7 +428,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
             {/* Streaming response */}
             {currentResponse && (
               <div className="flex gap-3 justify-start">
-                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center mt-0.5">
+                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-primary/15 to-teal-400/25 flex items-center justify-center mt-0.5">
                   <Bot className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <div className="flex flex-col gap-0.5 max-w-[80%]">
@@ -444,7 +445,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
             {/* Loading indicator */}
             {isLoading && !currentResponse && (
               <div className="flex gap-3 justify-start">
-                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-gradient-to-br from-primary/15 to-teal-400/25 flex items-center justify-center">
                   <Bot className="h-3.5 w-3.5 text-primary" />
                 </div>
                 <div className="flex flex-col gap-0.5">

@@ -59,14 +59,14 @@ const getStatusBadge = (status: string) => {
       );
     case 'in-progress':
       return (
-        <Badge className="gap-1 bg-info/10 text-info border-info/20">
+        <Badge className="gap-1 bg-amber-500 text-amber-950 border-transparent">
           <AlertCircle className="h-3 w-3" />
           In Bearbeitung
         </Badge>
       );
     case 'completed':
       return (
-        <Badge className="gap-1 bg-success/10 text-success border-success/20">
+        <Badge className="gap-1 bg-success text-success-foreground border-transparent">
           <CheckCircle className="h-3 w-3" />
           Abgeschlossen
         </Badge>
@@ -86,9 +86,9 @@ const getStatusBadge = (status: string) => {
 const getAuditTypeBadge = (type: string) => {
   const label = AUDIT_TYPE_LABELS[type as keyof typeof AUDIT_TYPE_LABELS] || type;
   const colors: Record<string, string> = {
-    'initial': 'bg-violet-500/10 text-violet-700 border-violet-500/20',
-    'surveillance': 'bg-amber-500/10 text-amber-800 border-amber-500/20',
-    'recertification': 'bg-success/10 text-success border-success/20',
+    'initial': 'bg-violet-500/[0.12] text-violet-700 border-violet-500/30',
+    'surveillance': 'bg-amber-500/[0.15] text-amber-800 border-amber-500/40',
+    'recertification': 'bg-success/[0.12] text-success border-success/30',
     'six-month': 'bg-cyan-500/10 text-cyan-700 border-cyan-500/30',
   };
 
@@ -150,7 +150,7 @@ export const CertificationAuditsList = ({
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="flex items-center gap-2">
-            <ClipboardCheck className="h-5 w-5" />
+            <ClipboardCheck className="h-5 w-5 text-primary" />
             Audits
             {audits.length > 0 && (
               <Badge variant="secondary" className="ml-2">

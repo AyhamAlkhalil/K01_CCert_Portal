@@ -90,10 +90,10 @@ const AUDIT_TYPE_LABELS: Record<string, string> = {
 };
 
 const AUDIT_TYPE_COLORS: Record<string, string> = {
-  'initial': 'bg-info/10 text-info border-info/20',
-  'surveillance': 'bg-amber-500/10 text-amber-800 border-amber-500/20',
-  'recertification': 'bg-success/10 text-success border-success/20',
-  'six-month': 'bg-violet-500/10 text-violet-700 border-violet-500/20',
+  'initial': 'bg-info/[0.12] text-info border-info/30',
+  'surveillance': 'bg-amber-500/[0.15] text-amber-800 border-amber-500/40',
+  'recertification': 'bg-success/[0.12] text-success border-success/30',
+  'six-month': 'bg-violet-500/[0.12] text-violet-700 border-violet-500/30',
 };
 
 // Sortable Task Item Component
@@ -653,7 +653,7 @@ export default function AuditTemplates() {
           <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 space-y-0 pb-4">
             <div>
               <CardTitle className="flex items-center gap-2">
-                <ListChecks className="h-5 w-5" />
+                <ListChecks className="h-5 w-5 text-primary" />
                 Vorlagen-Übersicht
               </CardTitle>
               <CardDescription>

@@ -129,16 +129,16 @@ const Dashboard = () => {
 
       {/* Main Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        <Card className="flex flex-col h-full">
+        <Card className="flex flex-col h-full border-primary/20 bg-gradient-to-br from-primary/[0.06] to-card">
           <CardHeader className="p-5 pb-3">
             <CardTitle className="flex items-start justify-between gap-3 text-[15px]">
               <span className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/[0.08] text-primary">
+                <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
                   <Building2 className="h-4 w-4" />
                 </span>
                 Kundenübersicht
               </span>
-              <span className="text-[26px] font-semibold leading-none tracking-tight tabular-nums">{clientStats.totalClients}</span>
+              <span className="text-[26px] font-semibold leading-none tracking-tight tabular-nums text-primary">{clientStats.totalClients}</span>
             </CardTitle>
             <p className="text-xs text-muted-foreground">Aktueller Stand</p>
           </CardHeader>
@@ -150,23 +150,23 @@ const Dashboard = () => {
               </div>
               <div className="flex items-center justify-between text-[13px]">
                 <span className="text-muted-foreground truncate mr-2">Kunden (aktiv)</span>
-                <span className="font-medium text-success tabular-nums">{clientStats.activeClients}</span>
+                <span className="font-semibold text-success tabular-nums">{clientStats.activeClients}</span>
               </div>
               <div className="flex items-center justify-between text-[13px]">
                 <span className="text-muted-foreground truncate mr-2">Kunden (inaktiv)</span>
-                <span className="font-medium text-destructive tabular-nums">{clientStats.inactiveClients}</span>
+                <span className="font-semibold text-destructive tabular-nums">{clientStats.inactiveClients}</span>
               </div>
 
               {bodyStats.length > 0 && (
-                <div className="flex flex-col mt-4 border-t border-border/70 pt-4">
-                  <p className="eyebrow pb-2.5">Zertifizierungen je Zertifizierer</p>
+                <div className="flex flex-col mt-4 border-t border-primary/15 pt-4">
+                  <p className="eyebrow pb-2.5 text-primary">Zertifizierungen je Zertifizierer</p>
                   <div className="max-h-[160px] lg:max-h-[120px] overflow-y-auto space-y-2">
                     {bodyStats.map((stat) => (
                       <div key={stat.bodyId} className="flex items-center justify-between text-[13px]">
                         <span className="text-muted-foreground truncate mr-2" title={stat.bodyName}>
                           {stat.bodyShortName || stat.bodyName}
                         </span>
-                        <span className="font-medium tabular-nums">{stat.count}</span>
+                        <span className="font-semibold tabular-nums text-primary">{stat.count}</span>
                       </div>
                     ))}
                   </div>

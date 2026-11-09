@@ -20,12 +20,12 @@ export const AUDIT_STATUS_CONFIG = {
   'in-progress': {
     label: 'In Bearbeitung',
     variant: 'default' as const,
-    className: 'bg-warning/10 text-warning border-warning/20',
+    className: 'bg-amber-500 text-amber-950 border-transparent',
   },
   completed: {
     label: 'Abgeschlossen',
     variant: 'default' as const,
-    className: 'bg-success/10 text-success border-success/20',
+    className: 'bg-success text-success-foreground border-transparent',
   },
   cancelled: {
     label: 'Abgebrochen',
@@ -45,17 +45,17 @@ export const AUDIT_STATUS_LABELS: Record<string, string> = {
 // Audit status colors for badges
 export const AUDIT_STATUS_COLORS: Record<string, string> = {
   scheduled: 'border-border bg-secondary text-secondary-foreground',
-  'in-progress': 'border-warning/20 bg-warning/10 text-warning',
-  completed: 'border-success/20 bg-success/10 text-success',
-  cancelled: 'border-destructive/20 bg-destructive/10 text-destructive',
+  'in-progress': 'border-warning/30 bg-warning/[0.12] text-warning',
+  completed: 'border-success/30 bg-success/[0.12] text-success',
+  cancelled: 'border-destructive/30 bg-destructive/[0.12] text-destructive',
 } as const;
 
 // Task status configuration
 export const TASK_STATUS_CONFIG: Record<TaskStatus, { label: string; color: string; bg: string }> = {
   pending: { label: 'Ausstehend', color: 'text-secondary-foreground border-transparent', bg: 'bg-secondary' },
-  'in-progress': { label: 'In Bearbeitung', color: 'text-warning border-warning/20', bg: 'bg-warning/10' },
-  completed: { label: 'Abgeschlossen', color: 'text-success border-success/20', bg: 'bg-success/10' },
-  overdue: { label: 'Überfällig', color: 'text-destructive border-destructive/20', bg: 'bg-destructive/10' },
+  'in-progress': { label: 'In Bearbeitung', color: 'text-amber-950 border-transparent', bg: 'bg-amber-500' },
+  completed: { label: 'Abgeschlossen', color: 'text-success-foreground border-transparent', bg: 'bg-success' },
+  overdue: { label: 'Überfällig', color: 'text-destructive-foreground border-transparent', bg: 'bg-destructive' },
 } as const;
 
 // Timeline status configuration
@@ -125,7 +125,7 @@ export const ALERT_SEVERITY_CONFIG = {
     iconColor: 'text-warning',
   },
   info: {
-    bg: 'bg-info/10 border-info/20',
+    bg: 'bg-info/[0.12] border-info/30',
     iconColor: 'text-info',
   },
 } as const;

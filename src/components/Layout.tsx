@@ -110,16 +110,13 @@ const SidebarContent = ({
                     onClick={onNavClick}
                     aria-current={isActive ? 'page' : undefined}
                     className={cn(
-                      'relative flex items-center gap-3 rounded-lg px-3 py-[7px] text-[13.5px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring/60',
+                      'flex items-center gap-3 rounded-lg px-3 py-[7px] text-[13.5px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring/60',
                       isActive
-                        ? 'bg-sidebar-accent text-sidebar-accent-foreground'
-                        : 'text-sidebar-foreground/85 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground'
+                        ? 'bg-sidebar-primary text-sidebar-primary-foreground shadow-md shadow-black/25'
+                        : 'text-sidebar-foreground/85 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                     )}
                   >
-                    {isActive && (
-                      <span className="absolute left-0 top-1/2 h-4 w-[3px] -translate-y-1/2 rounded-r-full bg-sidebar-primary" />
-                    )}
-                    <item.icon className={cn('h-4 w-4 shrink-0', isActive && 'text-sidebar-primary')} />
+                    <item.icon className={cn('h-4 w-4 shrink-0', !isActive && 'text-sky-300')} />
                     <span className="truncate">{item.name}</span>
                   </Link>
                 );
@@ -142,7 +139,7 @@ const SidebarContent = ({
           to="/about"
           onClick={onNavClick}
           aria-current={isAboutActive ? 'page' : undefined}
-          className={cn(SIDEBAR_ACTION_CLASS, isAboutActive && 'bg-sidebar-accent text-sidebar-accent-foreground')}
+          className={cn(SIDEBAR_ACTION_CLASS, isAboutActive && 'bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary hover:text-sidebar-primary-foreground')}
         >
           <Info className="h-4 w-4 shrink-0" />
           Über diese Software

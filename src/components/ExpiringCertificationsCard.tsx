@@ -42,7 +42,7 @@ const KanbanColumn = ({
   onItemClick: (id: string) => void;
 }) => (
   <div className="flex flex-col min-w-0">
-    <div className={`flex items-center gap-2 mb-3 mr-2 pb-2 border-b ${accentClass}`}>
+    <div className={`flex items-center gap-2 mb-3 mr-2 pb-2 border-b-2 ${accentClass}`}>
       <Icon className="h-3.5 w-3.5 shrink-0" />
       <span className="text-[11px] font-semibold uppercase tracking-[0.06em] truncate">{title}</span>
       <Badge variant={badgeVariant} className="text-[11px] px-2 py-0 ml-auto shrink-0">
@@ -185,7 +185,7 @@ export const ExpiringCertificationsCard = () => {
             title="Abgelaufen"
             icon={AlertTriangle}
             items={columns.expired}
-            accentClass="border-destructive/50 text-destructive"
+            accentClass="border-destructive text-destructive"
             badgeVariant="destructive"
             emptyText="Keine abgelaufenen"
             onItemClick={handleClick}
@@ -194,7 +194,7 @@ export const ExpiringCertificationsCard = () => {
             title="Kritisch (≤30d)"
             icon={Clock}
             items={columns.critical}
-            accentClass="border-warning/50 text-warning"
+            accentClass="border-warning text-warning"
             badgeVariant="outline"
             emptyText="Keine kritischen"
             onItemClick={handleClick}
@@ -203,7 +203,7 @@ export const ExpiringCertificationsCard = () => {
             title="Bald fällig (≤90d)"
             icon={CalendarClock}
             items={columns.upcoming}
-            accentClass="border-border text-muted-foreground"
+            accentClass="border-primary text-primary"
             badgeVariant="secondary"
             emptyText="Keine bevorstehenden"
             onItemClick={handleClick}

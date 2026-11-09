@@ -67,9 +67,9 @@ const SEVERITY_LABELS: Record<string, string> = {
 };
 
 const SEVERITY_COLORS: Record<string, string> = {
-  major: 'bg-destructive/10 text-destructive border-destructive/20',
-  minor: 'bg-warning/10 text-warning border-warning/20',
-  recommendation: 'bg-info/10 text-info border-info/20',
+  major: 'bg-destructive/[0.12] text-destructive border-destructive/30',
+  minor: 'bg-warning/[0.12] text-warning border-warning/30',
+  recommendation: 'bg-info/[0.12] text-info border-info/30',
 };
 
 const getDefaultTasksForAuditType = (type: AuditType, scheduledDate: Date) => {

@@ -48,16 +48,16 @@ export const AuditYearStatsCard = () => {
   if (isLoading) return null;
 
   return (
-    <Card className="flex flex-col h-full">
+    <Card className="flex flex-col h-full border-violet-500/20 bg-gradient-to-br from-violet-500/[0.06] to-card">
       <CardHeader className="p-5 pb-3">
         <CardTitle className="flex items-start justify-between gap-3 text-[15px]">
           <span className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/[0.08] text-primary">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-violet-600 text-white shadow-sm">
               <BarChart3 className="h-4 w-4" />
             </span>
             Audits
           </span>
-          <span className="text-[26px] font-semibold leading-none tracking-tight tabular-nums">{stats.total}</span>
+          <span className="text-[26px] font-semibold leading-none tracking-tight tabular-nums text-violet-700">{stats.total}</span>
         </CardTitle>
         <div className="flex items-center justify-between gap-2">
           <p className="text-xs text-muted-foreground">{stats.label}</p>

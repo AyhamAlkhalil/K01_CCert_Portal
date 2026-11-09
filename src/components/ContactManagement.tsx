@@ -204,7 +204,7 @@ export const ContactManagement = ({ clientId, isEditing = false }: ContactManage
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <User className="h-5 w-5" />
+            <User className="h-5 w-5 text-primary" />
             Ansprechpartner
           </CardTitle>
         </CardHeader>
@@ -223,7 +223,7 @@ export const ContactManagement = ({ clientId, isEditing = false }: ContactManage
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="flex items-center gap-2">
-            <User className="h-5 w-5" />
+            <User className="h-5 w-5 text-primary" />
             Ansprechpartner
             {contacts.length > 0 && (
               <Badge variant="secondary" className="ml-1">

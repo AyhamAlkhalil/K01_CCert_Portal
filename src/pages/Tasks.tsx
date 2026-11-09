@@ -69,8 +69,8 @@ const SEVERITY_LABELS: Record<string, string> = {
   major: 'Haupt-NK', minor: 'Neben-NK', recommendation: 'Empfehlung',
 };
 const SEVERITY_CLASSES: Record<string, string> = {
-  major: 'bg-destructive/10 text-destructive border-destructive/20',
-  minor: 'bg-warning/10 text-warning border-warning/20',
+  major: 'bg-destructive/[0.12] text-destructive border-destructive/30',
+  minor: 'bg-warning/[0.12] text-warning border-warning/30',
   recommendation: 'bg-secondary text-secondary-foreground border-border',
 };
 

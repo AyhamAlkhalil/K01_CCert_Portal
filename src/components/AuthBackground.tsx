@@ -10,9 +10,9 @@ const PAPERS = [
 export default function AuthBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(212,56%,22%)] via-[hsl(214,54%,14%)] to-[hsl(216,58%,9%)]" />
-      <div className="absolute -left-1/4 -top-1/4 h-[70%] w-[90%] rounded-full bg-[hsl(205,70%,45%)] opacity-[0.12] blur-[110px]" />
-      <div className="absolute -bottom-1/4 -right-1/4 h-[60%] w-[70%] rounded-full bg-[hsl(158,52%,50%)] opacity-[0.08] blur-[110px]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(221,72%,34%)] via-[hsl(220,62%,19%)] to-[hsl(216,58%,10%)]" />
+      <div className="absolute -left-1/4 -top-1/4 h-[70%] w-[90%] rounded-full bg-[hsl(199,89%,55%)] opacity-[0.24] blur-[110px]" />
+      <div className="absolute -bottom-1/4 -right-1/4 h-[60%] w-[70%] rounded-full bg-[hsl(174,72%,50%)] opacity-[0.18] blur-[110px]" />
 
       {PAPERS.map((paper) => (
         <div

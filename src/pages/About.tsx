@@ -28,7 +28,7 @@ const About = () => (
     <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
       <Card className="flex flex-col">
         <CardContent className="flex flex-1 flex-col p-6 sm:p-8">
-          <p className="eyebrow">Support</p>
+          <p className="eyebrow text-primary">Support</p>
           <h2 className="mt-3 font-display text-[22px] font-medium leading-snug tracking-[-0.01em]">
             Fragen oder Anmerkungen?
           </h2>
@@ -48,7 +48,7 @@ const About = () => (
 
       <Card className="flex flex-col">
         <CardContent className="flex flex-1 flex-col p-6 sm:p-8">
-          <p className="eyebrow">Entwickelt von {DEVELOPER_NAME}</p>
+          <p className="eyebrow text-primary">Entwickelt von {DEVELOPER_NAME}</p>
           <img src={kitechLogo} alt={DEVELOPER_NAME} className="mt-3.5 h-9 w-auto self-start" />
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             Wir verbinden bestehende Systeme, automatisieren Geschäftsprozesse und entwickeln individuelle Software dort,

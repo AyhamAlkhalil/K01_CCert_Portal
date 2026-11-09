@@ -44,11 +44,11 @@ const ENTITY_ICONS: Record<string, React.ComponentType<{ className?: string }>> 
 };
 
 const ACTION_COLORS: Record<string, string> = {
-  created: 'bg-success/10 text-success border-success/20',
-  updated: 'bg-info/10 text-info border-info/20',
-  deleted: 'bg-destructive/10 text-destructive border-destructive/20',
-  status_changed: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
-  imported: 'bg-violet-500/10 text-violet-700 border-violet-500/20',
+  created: 'bg-success/[0.12] text-success border-success/30',
+  updated: 'bg-info/[0.12] text-info border-info/30',
+  deleted: 'bg-destructive/[0.12] text-destructive border-destructive/30',
+  status_changed: 'bg-amber-500/[0.15] text-amber-800 border-amber-500/40',
+  imported: 'bg-violet-500/[0.12] text-violet-700 border-violet-500/30',
 };
 
 const getEntityLink = (entityType: string, entityId: string | null, details?: Record<string, unknown> | null): string | null => {
@@ -146,7 +146,7 @@ const ActivityLog = () => {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <History className="h-5 w-5" />
+              <History className="h-5 w-5 text-primary" />
               Aktivitäten
               <Badge variant="secondary" className="ml-2">{filtered.length}</Badge>
             </CardTitle>

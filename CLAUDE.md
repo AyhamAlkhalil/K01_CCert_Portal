@@ -331,7 +331,7 @@ Beim Anpassen des System-Prompts (`buildSystemPrompt` in der Edge Function) folg
 - `src/lib/constants.ts` — alle Display-Labels und Config-Objekte für audit types, statuses, urgency
 - Toast notifications via `sonner` (`import { toast } from "sonner"`)
 - Seitenkopf immer über `src/components/PageHeader.tsx`; Seitenrand `p-4 sm:p-6 lg:p-8`
-- Statusfarben nur über Tokens im Muster `bg-success/10 text-success border-success/20` (`success`, `warning`, `destructive`, `info`), keine festen Tailwind-Farben wie `bg-green-100`
+- Getönte Anzeigen über Tokens im Muster `bg-success/[0.12] text-success border-success/30` (`success`, `warning`, `destructive`, `info`); Audit- und Aufgabenstatus kräftig über die Konfiguration in `src/lib/constants.ts`
 - Support-Adresse und Entwickler-Link stehen auf `/about` (`src/pages/About.tsx`) und im Login (`src/pages/Auth.tsx`)
 
 ### logActivity()

@@ -80,14 +80,14 @@ const AUDIT_MODE_CONFIG = {
   remote: {
     label: 'Remote',
     Icon: Globe,
-    modeBadge: 'bg-info/10 text-info border-info/20',
-    certBadge: 'bg-info/10 text-info border-info/20',
+    modeBadge: 'bg-info/[0.12] text-info border-info/30',
+    certBadge: 'bg-info/[0.12] text-info border-info/30',
   },
   hybrid: {
     label: 'Hybrid',
     Icon: Monitor,
-    modeBadge: 'bg-violet-500/10 text-violet-700 border-violet-500/20',
-    certBadge: 'bg-violet-500/10 text-violet-700 border-violet-500/20',
+    modeBadge: 'bg-violet-500/[0.12] text-violet-700 border-violet-500/30',
+    certBadge: 'bg-violet-500/[0.12] text-violet-700 border-violet-500/30',
   },
   'on-site': {
     label: 'Präsenz',
@@ -401,11 +401,11 @@ const Clients = () => {
               <div className="flex gap-1.5">
                 {Array.from(new Set(row.certifications.map(c => c.status).filter(Boolean))).map((status, i) => {
                   const statusColors: Record<string, string> = {
-                    active: 'bg-success/10 text-success border-success/20',
-                    valid: 'bg-success/10 text-success border-success/20',
-                    suspended: 'bg-warning/10 text-warning border-warning/20',
-                    expired: 'bg-destructive/10 text-destructive border-destructive/20',
-                    pending: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+                    active: 'bg-success/[0.12] text-success border-success/30',
+                    valid: 'bg-success/[0.12] text-success border-success/30',
+                    suspended: 'bg-warning/[0.12] text-warning border-warning/30',
+                    expired: 'bg-destructive/[0.12] text-destructive border-destructive/30',
+                    pending: 'bg-amber-500/[0.15] text-amber-800 border-amber-500/40',
                     withdrawn: 'bg-muted text-muted-foreground border-border',
                   };
                   const statusLabel: Record<string, string> = {
@@ -1097,11 +1097,11 @@ const Clients = () => {
                                                       )}
                                                       {row.certifications.map(c => c.status).filter(Boolean).map((status, i) => {
                                                         const statusColors: Record<string, string> = {
-                                                          active: 'bg-success/10 text-success border-success/20',
-                                                          valid: 'bg-success/10 text-success border-success/20',
-                                                          suspended: 'bg-warning/10 text-warning border-warning/20',
-                                                          expired: 'bg-destructive/10 text-destructive border-destructive/20',
-                                                          pending: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+                                                          active: 'bg-success/[0.12] text-success border-success/30',
+                                                          valid: 'bg-success/[0.12] text-success border-success/30',
+                                                          suspended: 'bg-warning/[0.12] text-warning border-warning/30',
+                                                          expired: 'bg-destructive/[0.12] text-destructive border-destructive/30',
+                                                          pending: 'bg-amber-500/[0.15] text-amber-800 border-amber-500/40',
                                                           withdrawn: 'bg-muted text-muted-foreground border-border',
                                                         };
                                                         const statusLabel: Record<string, string> = {

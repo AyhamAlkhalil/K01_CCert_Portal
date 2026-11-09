@@ -219,7 +219,7 @@ function ClientSequenceCard({
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <CardTitle className="flex items-center gap-2 text-base">
-              <ListOrdered className="h-4 w-4" />
+              <ListOrdered className="h-4 w-4 text-primary" />
               Audit-Sequenz
               {hasClientSeqs && (
                 <Badge variant="secondary" className="text-xs ml-1">Individuell</Badge>
@@ -506,11 +506,11 @@ const CertificationDetail = () => {
     if (!statusOption) return null;
 
     const colorMap: Record<string, string> = {
-      active: 'bg-success/10 text-success border-success/20',
-      valid: 'bg-success/10 text-success border-success/20',
-      suspended: 'bg-warning/10 text-warning border-warning/20',
-      expired: 'bg-destructive/10 text-destructive border-destructive/20',
-      pending: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+      active: 'bg-success/[0.12] text-success border-success/30',
+      valid: 'bg-success/[0.12] text-success border-success/30',
+      suspended: 'bg-warning/[0.12] text-warning border-warning/30',
+      expired: 'bg-destructive/[0.12] text-destructive border-destructive/30',
+      pending: 'bg-amber-500/[0.15] text-amber-800 border-amber-500/40',
     };
 
     return (
@@ -569,7 +569,7 @@ const CertificationDetail = () => {
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
-            <div className="hidden sm:flex h-12 w-12 items-center justify-center bg-primary/[0.08] rounded-xl shrink-0">
+            <div className="hidden sm:flex h-12 w-12 items-center justify-center bg-primary/10 rounded-xl shrink-0">
               <Award className="h-6 w-6 text-primary" />
             </div>
             <div className="min-w-0">
@@ -824,7 +824,7 @@ const CertificationDetail = () => {
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="flex items-center gap-2">
-                  <FileText className="h-5 w-5" />
+                  <FileText className="h-5 w-5 text-primary" />
                   Dokumente
                 </CardTitle>
                 <div>

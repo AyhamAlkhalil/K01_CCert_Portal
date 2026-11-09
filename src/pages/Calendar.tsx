@@ -234,8 +234,8 @@ const Calendar = () => {
                           onClick={hasEvents ? handleDayClick : undefined}
                           className={cn(
                             'min-h-16 sm:min-h-24 p-1 sm:p-2 border rounded-lg bg-card transition-all',
-                            hasEvents ? 'border-border cursor-pointer hover:border-foreground/25 hover:shadow-md' : 'border-border/50',
-                            isToday && 'border-primary ring-1 ring-primary'
+                            hasEvents ? 'bg-primary/5 border-primary/20 cursor-pointer hover:bg-primary/10 hover:shadow-md' : 'border-border/50',
+                            isToday && 'border-primary ring-2 ring-primary'
                           )}
                         >
                           <div className={cn(
@@ -248,7 +248,7 @@ const Calendar = () => {
                           {dayAudits.map((audit) => (
                             <div
                               key={audit.id}
-                              className="text-[10px] sm:text-xs font-medium bg-primary/[0.08] text-primary px-1 sm:px-2 py-0.5 sm:py-1 rounded-md mb-1 truncate"
+                              className="text-[10px] sm:text-xs font-medium bg-primary/10 text-primary px-1 sm:px-2 py-0.5 sm:py-1 rounded-md mb-1 truncate"
                             >
                               {audit.clientName}
                             </div>
@@ -256,7 +256,7 @@ const Calendar = () => {
                           {dayFindings.map((finding) => (
                             <div
                               key={finding.id}
-                              className="text-[10px] sm:text-xs bg-warning/10 text-warning border-warning/20 px-1 sm:px-2 py-0.5 sm:py-1 rounded-md mb-1 truncate flex items-center gap-1"
+                              className="text-[10px] sm:text-xs bg-warning/[0.12] text-warning border-warning/30 px-1 sm:px-2 py-0.5 sm:py-1 rounded-md mb-1 truncate flex items-center gap-1"
                             >
                               <AlertTriangle className="h-3 w-3 shrink-0" />
                               {finding.clientName}
@@ -346,9 +346,9 @@ const Calendar = () => {
                         </div>
                         {finding.severity && (
                           <Badge variant="outline" className={cn('text-xs', {
-                            'bg-destructive/10 text-destructive border-destructive/20': finding.severity === 'major',
-                            'bg-warning/10 text-warning border-warning/20': finding.severity === 'minor',
-                            'bg-info/10 text-info border-info/20': finding.severity === 'recommendation',
+                            'bg-destructive/[0.12] text-destructive border-destructive/30': finding.severity === 'major',
+                            'bg-warning/[0.12] text-warning border-warning/30': finding.severity === 'minor',
+                            'bg-info/[0.12] text-info border-info/30': finding.severity === 'recommendation',
                           })}>
                             {finding.severity === 'major' ? 'Haupt-NK' : finding.severity === 'minor' ? 'Neben-NK' : 'Empfehlung'}
                           </Badge>
