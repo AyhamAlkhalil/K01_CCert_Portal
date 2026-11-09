@@ -10,6 +10,7 @@ import { de } from 'date-fns/locale';
 import { History, User, Search, FileCheck, Users, Award, Building2, UserCheck, MessageSquare } from 'lucide-react';
 import { useState, useMemo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PageHeader } from '@/components/PageHeader';
 import { supabase } from '@/integrations/supabase/client';
 
 const ACTION_LABELS: Record<string, string> = {
@@ -43,11 +44,11 @@ const ENTITY_ICONS: Record<string, React.ComponentType<{ className?: string }>> 
 };
 
 const ACTION_COLORS: Record<string, string> = {
-  created: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
-  updated: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
-  deleted: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200',
-  status_changed: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
-  imported: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+  created: 'bg-success/10 text-success border-success/20',
+  updated: 'bg-info/10 text-info border-info/20',
+  deleted: 'bg-destructive/10 text-destructive border-destructive/20',
+  status_changed: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+  imported: 'bg-violet-500/10 text-violet-700 border-violet-500/20',
 };
 
 const getEntityLink = (entityType: string, entityId: string | null, details?: Record<string, unknown> | null): string | null => {
@@ -116,11 +117,8 @@ const ActivityLog = () => {
 
   return (
     <>
-      <div className="p-4 sm:p-6 lg:p-8 space-y-6">
-        <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Aktivitäten-Protokoll</h1>
-          <p className="text-sm text-muted-foreground">Übersicht aller Benutzeraktivitäten</p>
-        </div>
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
+        <PageHeader title="Aktivitäten-Protokoll" description="Übersicht aller Benutzeraktivitäten" />
 
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">

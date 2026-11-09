@@ -24,6 +24,7 @@ const CertificationsManagement = lazy(() => import("./pages/CertificationsManage
 const AuditTemplates = lazy(() => import("./pages/AuditTemplates"));
 const CertificationDetail = lazy(() => import("./pages/CertificationDetail"));
 const Agents = lazy(() => import("./pages/Agents"));
+const About = lazy(() => import("./pages/About"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,6 +60,7 @@ const App = () => (
               <Route path="/calendar" element={<Suspense fallback={null}><Calendar /></Suspense>} />
               <Route path="/activity-log" element={<Suspense fallback={null}><ActivityLog /></Suspense>} />
               <Route path="/agents" element={<Suspense fallback={null}><Agents /></Suspense>} />
+              <Route path="/about" element={<Suspense fallback={null}><About /></Suspense>} />
               <Route path="/certifications/:id" element={<Suspense fallback={null}><CertificationDetail /></Suspense>} />
 
               {/* Settings Routes */}

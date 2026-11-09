@@ -42,31 +42,31 @@ const KanbanColumn = ({
   onItemClick: (id: string) => void;
 }) => (
   <div className="flex flex-col min-w-0">
-    <div className={`flex items-center gap-2 mb-2 pb-2 border-b-2 ${accentClass}`}>
+    <div className={`flex items-center gap-2 mb-3 mr-2 pb-2 border-b ${accentClass}`}>
       <Icon className="h-3.5 w-3.5 shrink-0" />
-      <span className="text-xs font-semibold uppercase tracking-wider truncate">{title}</span>
-      <Badge variant={badgeVariant} className="text-[10px] px-1.5 py-0 ml-auto shrink-0">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.06em] truncate">{title}</span>
+      <Badge variant={badgeVariant} className="text-[11px] px-2 py-0 ml-auto shrink-0">
         {items.length}
       </Badge>
     </div>
     <ScrollArea className="h-[260px]">
       {items.length === 0 ? (
-        <p className="text-xs text-muted-foreground text-center py-6 italic">{emptyText}</p>
+        <p className="text-xs text-muted-foreground text-center py-6">{emptyText}</p>
       ) : (
         <div className="space-y-1.5 pr-2">
           {items.map((cert) => (
             <div
               key={cert.id}
               onClick={() => onItemClick(cert.id)}
-              className="group rounded-md border bg-card p-2.5 cursor-pointer transition-all hover:shadow-sm hover:border-primary/30 hover:-translate-y-px"
+              className="group rounded-lg border border-border/70 bg-card p-3 cursor-pointer transition-all hover:shadow-md hover:border-foreground/20"
             >
-              <p className="text-xs font-medium truncate leading-tight">{cert.clientName}</p>
-              <p className="text-[11px] text-muted-foreground truncate">{cert.certificationName}</p>
+              <p className="text-[13px] font-medium truncate leading-snug">{cert.clientName}</p>
+              <p className="text-xs text-muted-foreground truncate">{cert.certificationName}</p>
               <div className="flex items-center justify-between mt-1.5 pt-1.5 border-t border-border/50">
-                <span className="text-[10px] text-muted-foreground">
+                <span className="text-[11px] text-muted-foreground tabular-nums">
                   {format(cert.validUntil, 'dd.MM.yyyy')}
                 </span>
-                <span className="text-[10px] font-semibold">
+                <span className="text-[11px] font-medium tabular-nums">
                   {cert.status === 'expired'
                     ? `${Math.abs(cert.daysUntilExpiry)} Tage überfällig`
                     : `in ${cert.daysUntilExpiry} Tagen`}
@@ -136,7 +136,7 @@ export const ExpiringCertificationsCard = () => {
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-base">
-            <ShieldAlert className="h-4 w-4 text-amber-500" />
+            <ShieldAlert className="h-4 w-4 text-warning" />
             Ablaufende Zertifikate
           </CardTitle>
         </CardHeader>
@@ -152,7 +152,7 @@ export const ExpiringCertificationsCard = () => {
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-base">
-            <ShieldCheck className="h-4 w-4 text-green-500" />
+            <ShieldCheck className="h-4 w-4 text-success" />
             Ablaufende Zertifikate
           </CardTitle>
         </CardHeader>
@@ -172,9 +172,9 @@ export const ExpiringCertificationsCard = () => {
     <Card>
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center gap-2 text-base">
-          <ShieldAlert className="h-4 w-4 text-amber-500" />
+          <ShieldAlert className="h-4 w-4 text-warning" />
           Ablaufende Zertifikate
-          <Badge variant="secondary" className="text-[10px] px-1.5 py-0 ml-auto">
+          <Badge variant="secondary" className="text-[11px] px-2 py-0 ml-auto font-medium">
             nächste 90 Tage
           </Badge>
         </CardTitle>
@@ -185,7 +185,7 @@ export const ExpiringCertificationsCard = () => {
             title="Abgelaufen"
             icon={AlertTriangle}
             items={columns.expired}
-            accentClass="border-destructive text-destructive"
+            accentClass="border-destructive/50 text-destructive"
             badgeVariant="destructive"
             emptyText="Keine abgelaufenen"
             onItemClick={handleClick}
@@ -194,7 +194,7 @@ export const ExpiringCertificationsCard = () => {
             title="Kritisch (≤30d)"
             icon={Clock}
             items={columns.critical}
-            accentClass="border-amber-500 text-amber-600 dark:text-amber-400"
+            accentClass="border-warning/50 text-warning"
             badgeVariant="outline"
             emptyText="Keine kritischen"
             onItemClick={handleClick}
@@ -203,7 +203,7 @@ export const ExpiringCertificationsCard = () => {
             title="Bald fällig (≤90d)"
             icon={CalendarClock}
             items={columns.upcoming}
-            accentClass="border-muted-foreground/30 text-muted-foreground"
+            accentClass="border-border text-muted-foreground"
             badgeVariant="secondary"
             emptyText="Keine bevorstehenden"
             onItemClick={handleClick}

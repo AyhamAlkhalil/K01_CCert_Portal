@@ -1,11 +1,12 @@
 import { useState, useRef } from "react";
 import * as XLSX from "xlsx";
 import ReactMarkdown from "react-markdown";
-import { BookOpen, Upload, TrendingUp, RotateCcw, AlertTriangle, Info, Loader2, Bot } from "lucide-react";
+import { BookOpen, Upload, TrendingUp, RotateCcw, AlertTriangle, Info, Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { PageHeader } from '@/components/PageHeader';
 import { useRunAgent, EinlagerungResult } from "@/hooks/useAgents";
 
 const COLUMN_MAP: Record<string, string> = {
@@ -265,22 +266,14 @@ function EinlagerungResultView({ data }: { data: EinlagerungResult }) {
 const Agents = () => {
   const { mutate, data: result, isPending, error, reset } = useRunAgent();
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6">
-      <div className="flex items-center gap-3">
-        <div className="p-2 rounded-lg bg-primary/10 text-primary">
-          <Bot className="h-6 w-6" />
-        </div>
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">KI-Agenten</h1>
-          <p className="text-sm text-muted-foreground">Spezialisierte Assistenten für Zertifizierungsaufgaben</p>
-        </div>
-      </div>
+    <div className="p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto space-y-5 sm:space-y-6 animate-fade-in">
+      <PageHeader title="KI-Agenten" description="Spezialisierte Assistenten für Zertifizierungsaufgaben" />
       <div className="grid md:grid-cols-2 gap-6 items-start">
         <Card>
           <CardHeader className="pb-4">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-md bg-orange-50">
-                <BookOpen className="h-4 w-4 text-orange-600" />
+              <div className="p-1.5 rounded-md bg-warning/10">
+                <BookOpen className="h-4 w-4 text-warning" />
               </div>
               <CardTitle className="text-base">Betriebstagebuch-Auswertung</CardTitle>
             </div>

@@ -329,7 +329,7 @@ const ClientDetail = () => {
 
   return (
     <>
-      <div className="p-4 sm:p-8 space-y-4 sm:space-y-6 animate-fade-in">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -341,17 +341,17 @@ const ClientDetail = () => {
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
-            <div className="hidden sm:block p-2 bg-primary/10 rounded-lg shrink-0">
-              <Building2 className="h-8 w-8 text-primary" />
+            <div className="hidden sm:flex h-12 w-12 items-center justify-center bg-primary/[0.08] rounded-xl shrink-0">
+              <Building2 className="h-6 w-6 text-primary" />
             </div>
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 {client.client_number && (
-                  <Badge variant="outline" className="font-mono text-xs sm:text-sm">
+                  <Badge variant="outline" className="font-mono text-xs">
                     KD-Nr. {client.client_number}
                   </Badge>
                 )}
-                <h1 className="text-xl sm:text-3xl font-bold text-foreground truncate">{client.name}</h1>
+                <h1 className="font-display text-[26px] font-medium leading-tight tracking-[-0.01em] text-foreground sm:text-[30px] truncate">{client.name}</h1>
                 {client.is_active === false && (
                   <Badge variant="destructive" className="text-xs sm:text-sm">
                     Inaktiv
@@ -415,9 +415,9 @@ const ClientDetail = () => {
 
         {/* Lock Banner */}
         {isLockedByOther && (
-          <Alert className="border-orange-300 bg-orange-50 dark:bg-orange-950/20">
-            <Lock className="h-4 w-4 text-orange-600" />
-            <AlertDescription className="text-orange-800 dark:text-orange-200">
+          <Alert className="border-warning/25 bg-warning/5">
+            <Lock className="h-4 w-4 text-warning" />
+            <AlertDescription className="text-warning">
               Wird gerade von <span className="font-semibold">{lockedByName}</span> bearbeitet. Bearbeitung ist temporär gesperrt.
             </AlertDescription>
           </Alert>
@@ -453,7 +453,7 @@ const ClientDetail = () => {
                           checked={isActive}
                           onCheckedChange={setIsActive}
                         />
-                        <span className={`text-sm ${isActive ? 'font-medium text-green-600' : 'text-muted-foreground'}`}>
+                        <span className={`text-sm ${isActive ? 'font-medium text-success' : 'text-muted-foreground'}`}>
                           Aktiv
                         </span>
                       </div>
@@ -472,7 +472,7 @@ const ClientDetail = () => {
                         <SelectTrigger id="parent">
                           <SelectValue placeholder="Keine Gruppe (eigenständig)" />
                         </SelectTrigger>
-                        <SelectContent className="bg-background border shadow-lg z-50">
+                        <SelectContent>
                           <SelectItem value="__none__">Keine Gruppe (eigenständig)</SelectItem>
                           {sortedParentClients.map((parent) => (
                             <SelectItem key={parent.id} value={parent.id}>
@@ -513,7 +513,7 @@ const ClientDetail = () => {
                           <SelectTrigger id="country">
                             <SelectValue placeholder="Land auswählen" />
                           </SelectTrigger>
-                          <SelectContent className="bg-background border shadow-lg z-50">
+                          <SelectContent>
                             {COUNTRIES.map((c) => (
                               <SelectItem key={c} value={c}>
                                 {c}
@@ -528,7 +528,7 @@ const ClientDetail = () => {
                           <SelectTrigger id="consultant">
                             <SelectValue placeholder="Berater auswählen" />
                           </SelectTrigger>
-                          <SelectContent className="bg-background border shadow-lg z-50">
+                          <SelectContent>
                             {consultants.filter(c => c.is_active || c.id === consultantId).map((c) => (
                               <SelectItem key={c.id} value={c.id}>
                                 {c.name}
@@ -574,7 +574,7 @@ const ClientDetail = () => {
                         <SelectTrigger id="audit-mode">
                           <SelectValue />
                         </SelectTrigger>
-                        <SelectContent className="bg-background border shadow-lg z-50">
+                        <SelectContent>
                           <SelectItem value="on-site">Vor-Ort</SelectItem>
                           <SelectItem value="remote">Remote</SelectItem>
                           <SelectItem value="hybrid">Hybrid</SelectItem>
@@ -680,7 +680,7 @@ const ClientDetail = () => {
                           <SelectTrigger id="certification" className="mt-2">
                             <SelectValue placeholder="Zertifizierung auswählen" />
                           </SelectTrigger>
-                          <SelectContent className="bg-background border shadow-lg z-50">
+                          <SelectContent>
                             {availableCertsToAdd.map((cert) => (
                               <SelectItem key={cert.id} value={cert.id}>
                                 {cert.name}
@@ -695,7 +695,7 @@ const ClientDetail = () => {
                           <SelectTrigger id="cert-body" className="mt-2">
                             <SelectValue placeholder="Zertifizierer auswählen" />
                           </SelectTrigger>
-                          <SelectContent className="bg-background border shadow-lg z-50">
+                          <SelectContent>
                             {certificationBodies.map((body) => (
                               <SelectItem key={body.id} value={body.id}>
                                 {body.short_name || body.name}
@@ -739,12 +739,12 @@ const ClientDetail = () => {
                   <div className="space-y-2">
                     {clientCertifications.map((cc) => {
                       const statusColors: Record<string, string> = {
-                        active: 'bg-green-100 text-green-800 border-green-300',
-                        valid: 'bg-green-100 text-green-800 border-green-300',
-                        suspended: 'bg-orange-100 text-orange-800 border-orange-300',
-                        expired: 'bg-red-100 text-red-800 border-red-300',
-                        pending: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-                        withdrawn: 'bg-gray-100 text-gray-800 border-gray-300',
+                        active: 'bg-success/10 text-success border-success/20',
+                        valid: 'bg-success/10 text-success border-success/20',
+                        suspended: 'bg-warning/10 text-warning border-warning/20',
+                        expired: 'bg-destructive/10 text-destructive border-destructive/20',
+                        pending: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+                        withdrawn: 'bg-muted text-muted-foreground border-border',
                       };
                       const statusLabel: Record<string, string> = {
                         active: 'Aktiv',
@@ -758,8 +758,8 @@ const ClientDetail = () => {
                         <div
                           key={cc.id}
                           onClick={() => navigate(`/certifications/${cc.id}`)}
-                          className={`flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-lg cursor-pointer transition-colors group gap-1 ${cc.status === 'expired' ? 'bg-red-50 border border-red-200 hover:bg-red-100'
-                            : cc.status === 'suspended' ? 'bg-orange-50 border border-orange-200 hover:bg-orange-100'
+                          className={`flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-lg cursor-pointer transition-colors group gap-1 ${cc.status === 'expired' ? 'bg-destructive/5 border border-destructive/20 hover:bg-destructive/10'
+                            : cc.status === 'suspended' ? 'bg-warning/5 border border-warning/20 hover:bg-warning/10'
                               : 'bg-muted/50 hover:bg-primary/10'
                             }`}
                         >
@@ -846,7 +846,7 @@ const ClientDetail = () => {
                           {task.due_date && (
                             <span className={cn(
                               "text-xs px-2 py-1 rounded-full",
-                              new Date(task.due_date) < new Date() ? "bg-red-100 text-red-700" : "bg-primary/10 text-primary"
+                              new Date(task.due_date) < new Date() ? "bg-destructive/10 text-destructive" : "bg-primary/10 text-primary"
                             )}>
                               {format(new Date(task.due_date), 'dd.MM.yyyy')}
                             </span>

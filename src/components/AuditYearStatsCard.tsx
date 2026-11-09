@@ -49,34 +49,36 @@ export const AuditYearStatsCard = () => {
 
   return (
     <Card className="flex flex-col h-full">
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2 text-base">
-            <BarChart3 className="h-4 w-4 text-primary" />
+      <CardHeader className="p-5 pb-3">
+        <CardTitle className="flex items-start justify-between gap-3 text-[15px]">
+          <span className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/[0.08] text-primary">
+              <BarChart3 className="h-4 w-4" />
+            </span>
             Audits
-          </CardTitle>
-          <div className="flex items-center gap-3">
-            <Select value={viewMode} onValueChange={(val: 'calendar' | 'rolling') => setViewMode(val)}>
-              <SelectTrigger className="h-6 w-[120px] text-[10px]">
-                <Calendar className="h-3 w-3 mr-1" />
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-background border shadow-lg z-50">
-                <SelectItem value="calendar" className="text-xs">Aktuelles Jahr</SelectItem>
-                <SelectItem value="rolling" className="text-xs">Rollend (12M)</SelectItem>
-              </SelectContent>
-            </Select>
-            <span className="text-2xl font-bold">{stats.total}</span>
-          </div>
+          </span>
+          <span className="text-[26px] font-semibold leading-none tracking-tight tabular-nums">{stats.total}</span>
+        </CardTitle>
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-xs text-muted-foreground">{stats.label}</p>
+          <Select value={viewMode} onValueChange={(val: 'calendar' | 'rolling') => setViewMode(val)}>
+            <SelectTrigger className="h-7 w-[148px] text-xs" aria-label="Zeitraum">
+              <Calendar className="h-3 w-3 mr-1 shrink-0 text-muted-foreground" />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="calendar" className="text-xs">Aktuelles Jahr</SelectItem>
+              <SelectItem value="rolling" className="text-xs">Rollend (12M)</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        <p className="text-[10px] text-muted-foreground -mt-1">{stats.label}</p>
       </CardHeader>
-      <CardContent className="pt-0 flex-1">
-        <div className="space-y-1.5 mt-2">
+      <CardContent className="px-5 pb-5 pt-0 flex-1">
+        <div className="space-y-2 mt-1">
           {AUDIT_TYPES.map(type => (
-            <div key={type} className="flex items-center justify-between text-xs">
+            <div key={type} className="flex items-center justify-between text-[13px]">
               <span className="text-muted-foreground truncate mr-2">{AUDIT_TYPE_LABELS[type]}</span>
-              <span className="font-semibold tabular-nums">{stats.byType[type]}</span>
+              <span className="font-medium tabular-nums">{stats.byType[type]}</span>
             </div>
           ))}
         </div>

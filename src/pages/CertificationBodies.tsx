@@ -25,6 +25,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { PageHeader } from '@/components/PageHeader';
 import {
   Collapsible,
   CollapsibleContent,
@@ -257,19 +258,19 @@ const CertificationBodies = () => {
 
   return (
     <>
-      <div className="p-4 sm:p-8 space-y-4">
-        <div className="flex justify-between items-center gap-3">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold tracking-tight">Zertifizierer</h1>
-            <p className="text-sm text-muted-foreground">Verwalten Sie Ihre Zertifizierungspartner</p>
-          </div>
-          {!isAdding && !editingId && (
-            <Button onClick={handleAdd} size="sm">
-              <Plus className="h-4 w-4 mr-1" />
-              Hinzufügen
-            </Button>
-          )}
-        </div>
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
+        <PageHeader
+          title="Zertifizierer"
+          description="Verwalten Sie Ihre Zertifizierungspartner"
+          actions={
+            !isAdding && !editingId ? (
+              <Button onClick={handleAdd}>
+                <Plus className="h-4 w-4" />
+                Hinzufügen
+              </Button>
+            ) : undefined
+          }
+        />
 
         {/* Add Form */}
         {isAdding && (

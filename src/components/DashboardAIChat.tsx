@@ -279,15 +279,13 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
   return (
     <>
       {/* Hero-style centered input */}
-      <div className={cn("relative mb-6", className)}>
-        <div className="rounded-2xl border border-primary/10 bg-gradient-to-br from-primary/[0.02] via-card to-accent/[0.02] shadow-sm overflow-hidden">
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
-
+      <div className={cn("relative", className)}>
+        <div className="rounded-2xl border border-border/80 bg-card shadow-sm overflow-hidden">
           <div className="px-4 py-6 sm:px-10 sm:py-8">
             {/* Greeting */}
             <div className="flex items-start sm:items-center gap-3 mb-5 justify-center max-w-2xl mx-auto">
-              <div className="flex-shrink-0 w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-primary/10 flex items-center justify-center shadow-inner">
-                <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-primary animate-pulse" />
+              <div className="flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+                <Sparkles className="h-4 w-4 sm:h-[18px] sm:w-[18px] text-primary-foreground" />
               </div>
               <div className="min-h-[1.5rem] flex-1">
                 {greeting ? (
@@ -307,12 +305,12 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
             </div>
 
             {/* Centered large input */}
-            <div className="max-w-xl mx-auto">
+            <div className="max-w-2xl mx-auto">
               <div
                 className="relative cursor-text group/input"
                 onClick={handleHeroInputFocus}
               >
-                <div className="absolute left-3.5 sm:left-4 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 group-hover/input:bg-primary/20 transition-colors">
+                <div className="absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-lg bg-primary/[0.08] group-hover/input:bg-primary/[0.14] transition-colors">
                   <Bot className="h-4 w-4 text-primary" />
                 </div>
                 <Input
@@ -320,11 +318,11 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
                   onChange={handleHeroInputChange}
                   onFocus={handleHeroInputFocus}
                   placeholder="Wie kann ich dir heute helfen?"
-                  className="pl-14 sm:pl-16 pr-12 sm:pr-14 h-13 sm:h-15 bg-background/80 backdrop-blur-sm border-border/40 rounded-2xl text-sm sm:text-base shadow-[0_2px_10px_rgba(0,0,0,0.03)] hover:shadow-md hover:border-primary/20 focus:shadow-md focus:border-primary/30 transition-all placeholder:text-muted-foreground/50 border-2"
+                  className="pl-12 sm:pl-14 pr-12 sm:pr-14 h-12 sm:h-14 bg-background rounded-xl text-sm sm:text-[15px] shadow-none hover:shadow-sm focus-visible:shadow-sm transition-all placeholder:text-muted-foreground"
                   readOnly
                 />
-                <div className="absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2">
-                  <div className="h-9 w-9 flex items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
+                <div className="absolute right-2 sm:right-2.5 top-1/2 -translate-y-1/2">
+                  <div className="h-8 w-8 sm:h-9 sm:w-9 flex items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
                     <Send className="h-4 w-4" />
                   </div>
                 </div>
@@ -343,17 +341,17 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
           <DialogTitle className="sr-only">KI-Assistent</DialogTitle>
 
           {/* Header */}
-          <div className="flex items-center gap-3 px-4 sm:px-6 py-4 border-b border-border/40 bg-background/80 backdrop-blur-md safe-top">
-            <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center shadow-sm">
-              <Sparkles className="h-5 w-5 text-primary" />
+          <div className="flex items-center gap-3 px-4 sm:px-6 py-4 border-b border-border/70 bg-card safe-top">
+            <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center shadow-sm">
+              <Sparkles className="h-4 w-4 text-primary-foreground" />
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-[15px] font-bold text-foreground tracking-tight">KI-Assistent</h3>
-              <p className="text-[11px] text-muted-foreground/80 font-medium">Audits, Kunden & Zertifikate</p>
+              <h3 className="text-[15px] font-semibold text-foreground tracking-tight">KI-Assistent</h3>
+              <p className="text-xs text-muted-foreground">Audits, Kunden & Zertifikate</p>
             </div>
             <div className="flex items-center gap-2">
               {conversationHistory.length > 0 && (
-                <Button variant="ghost" size="sm" onClick={handleReset} className="h-8 px-2 text-[11px] font-bold text-muted-foreground hover:text-foreground">
+                <Button variant="ghost" size="sm" onClick={handleReset} className="h-8 px-2 text-xs font-medium text-muted-foreground hover:text-foreground">
                   Reset
                 </Button>
               )}
@@ -384,7 +382,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
                   <button
                     key={i}
                     onClick={() => handleExampleClick(prompt)}
-                    className="text-xs px-3 py-1.5 rounded-full border border-border/60 bg-muted/30 text-muted-foreground hover:bg-primary/10 hover:text-primary hover:border-primary/30 transition-all"
+                    className="text-xs px-3 py-1.5 rounded-full border border-border bg-card text-muted-foreground hover:bg-accent hover:text-foreground hover:border-foreground/20 transition-colors"
                   >
                     {prompt}
                   </button>
@@ -464,7 +462,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
           </div>
 
           {/* Input */}
-          <div className="border-t border-border/50 px-3 sm:px-5 py-3 sm:py-4 bg-gradient-to-t from-background to-transparent">
+          <div className="border-t border-border/70 px-3 sm:px-5 py-3 sm:py-4 bg-card">
             <div className="flex gap-2 max-w-xl mx-auto">
               <Input
                 ref={dialogInputRef}
@@ -472,7 +470,7 @@ export const DashboardAIChat = ({ className }: DashboardAIChatProps) => {
                 onChange={(e) => setDialogInput(e.target.value)}
                 onKeyDown={handleDialogKeyPress}
                 placeholder="Frag mich etwas..."
-                className="flex-1 h-10 sm:h-11 rounded-xl border-border/60 bg-muted/30 focus:bg-background transition-colors"
+                className="flex-1 h-10 sm:h-11 rounded-xl"
                 disabled={isLoading}
               />
               <Button

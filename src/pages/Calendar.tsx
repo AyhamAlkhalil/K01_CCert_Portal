@@ -7,13 +7,14 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Clock, Download, ChevronLeft, ChevronRight, AlertTriangle, User } from 'lucide-react';
+import { Clock, Download, ChevronLeft, ChevronRight, AlertTriangle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, isSameMonth, addMonths, subMonths, isAfter, isBefore } from 'date-fns';
 import { de } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import { exportAllAuditsToCalendar } from '@/lib/calendarExport';
 import { toast } from 'sonner';
+import { PageHeader } from '@/components/PageHeader';
 import { OutlookIntegration } from '@/components/OutlookIntegration';
 
 const CalendarSkeleton = () => (
@@ -22,7 +23,7 @@ const CalendarSkeleton = () => (
       <Skeleton className="h-6 w-32" />
     </CardHeader>
     <CardContent>
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7 gap-1 sm:gap-2">
         {[...Array(35)].map((_, i) => (
           <Skeleton key={i} className="h-24 w-full" />
         ))}
@@ -161,16 +162,12 @@ const Calendar = () => {
 
   return (
     <>
-      <div className="p-4 sm:p-8 space-y-4 sm:space-y-8 animate-fade-in">
-        {/* Header */}
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
         <div className="flex flex-col gap-4">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1 sm:mb-2">Kalender</h1>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <User className="h-4 w-4" />
-              <span>Angemeldet als <span className="font-medium text-foreground">{userName}</span></span>
-            </div>
-          </div>
+          <PageHeader
+            title="Kalender"
+            description={<>Angemeldet als <span className="font-medium text-foreground">{userName}</span></>}
+          />
           <div className="flex flex-wrap items-center gap-2 sm:gap-4">
             <div className="flex items-center gap-1 sm:gap-2">
               <Button variant="outline" size="icon" className="h-8 w-8 sm:h-9 sm:w-9" onClick={goToPreviousMonth}>
@@ -183,7 +180,7 @@ const Calendar = () => {
                 <ChevronRight className="h-4 w-4" />
               </Button>
             </div>
-            <span className="text-sm sm:text-lg font-medium text-foreground">
+            <span className="font-display text-base sm:text-xl font-medium text-foreground">
               {format(currentDate, 'MMMM yyyy', { locale: de })}
             </span>
             <Button size="sm" className="ml-auto" onClick={handleExportAll} disabled={audits.length === 0}>
@@ -207,15 +204,15 @@ const Calendar = () => {
                 <CardHeader>
                   <CardTitle>Monatsübersicht – {format(currentDate, 'MMMM yyyy', { locale: de })}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-7 gap-2">
+                <CardContent className="px-3 sm:px-6">
+                  <div className="grid grid-cols-7 gap-1 sm:gap-2">
                     {['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'].map((day) => (
-                      <div key={day} className="text-center text-sm font-medium text-muted-foreground py-2">
+                      <div key={day} className="eyebrow text-center py-2">
                         {day}
                       </div>
                     ))}
                     {Array.from({ length: startDayOffset }).map((_, i) => (
-                      <div key={`empty-${i}`} className="min-h-24 p-2" />
+                      <div key={`empty-${i}`} className="min-h-16 sm:min-h-24 p-1 sm:p-2" />
                     ))}
                     {daysInMonth.map((day) => {
                       const dayAudits = getAuditsForDay(day);
@@ -236,9 +233,9 @@ const Calendar = () => {
                           key={day.toISOString()}
                           onClick={hasEvents ? handleDayClick : undefined}
                           className={cn(
-                            'min-h-24 p-2 border rounded-lg transition-colors',
-                            hasEvents ? 'bg-primary/5 border-primary/20 cursor-pointer hover:bg-primary/10' : 'border-border',
-                            isToday && 'ring-2 ring-primary'
+                            'min-h-16 sm:min-h-24 p-1 sm:p-2 border rounded-lg bg-card transition-all',
+                            hasEvents ? 'border-border cursor-pointer hover:border-foreground/25 hover:shadow-md' : 'border-border/50',
+                            isToday && 'border-primary ring-1 ring-primary'
                           )}
                         >
                           <div className={cn(
@@ -251,7 +248,7 @@ const Calendar = () => {
                           {dayAudits.map((audit) => (
                             <div
                               key={audit.id}
-                              className="text-xs bg-primary/10 text-primary px-2 py-1 rounded mb-1 truncate"
+                              className="text-[10px] sm:text-xs font-medium bg-primary/[0.08] text-primary px-1 sm:px-2 py-0.5 sm:py-1 rounded-md mb-1 truncate"
                             >
                               {audit.clientName}
                             </div>
@@ -259,7 +256,7 @@ const Calendar = () => {
                           {dayFindings.map((finding) => (
                             <div
                               key={finding.id}
-                              className="text-xs bg-orange-100 text-orange-800 px-2 py-1 rounded mb-1 truncate flex items-center gap-1"
+                              className="text-[10px] sm:text-xs bg-warning/10 text-warning border-warning/20 px-1 sm:px-2 py-0.5 sm:py-1 rounded-md mb-1 truncate flex items-center gap-1"
                             >
                               <AlertTriangle className="h-3 w-3 shrink-0" />
                               {finding.clientName}
@@ -329,7 +326,7 @@ const Calendar = () => {
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <AlertTriangle className="h-4 w-4 text-orange-500" />
+                      <AlertTriangle className="h-4 w-4 text-warning" />
                       NK-Fristen
                     </CardTitle>
                   </CardHeader>
@@ -349,9 +346,9 @@ const Calendar = () => {
                         </div>
                         {finding.severity && (
                           <Badge variant="outline" className={cn('text-xs', {
-                            'bg-red-100 text-red-800 border-red-300': finding.severity === 'major',
-                            'bg-orange-100 text-orange-800 border-orange-300': finding.severity === 'minor',
-                            'bg-blue-100 text-blue-800 border-blue-300': finding.severity === 'recommendation',
+                            'bg-destructive/10 text-destructive border-destructive/20': finding.severity === 'major',
+                            'bg-warning/10 text-warning border-warning/20': finding.severity === 'minor',
+                            'bg-info/10 text-info border-info/20': finding.severity === 'recommendation',
                           })}>
                             {finding.severity === 'major' ? 'Haupt-NK' : finding.severity === 'minor' ? 'Neben-NK' : 'Empfehlung'}
                           </Badge>

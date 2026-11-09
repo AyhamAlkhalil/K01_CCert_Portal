@@ -257,7 +257,7 @@ export const OutlookIntegration = ({ auditCount = 0, audits = [] }: OutlookInteg
   return (
     <Card>
       <CardHeader className="pb-3">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-3">
             <div className={cn(
               "p-2 rounded-lg",
@@ -276,7 +276,8 @@ export const OutlookIntegration = ({ auditCount = 0, audits = [] }: OutlookInteg
             </div>
           </div>
           <Badge variant={isConnected ? "default" : "secondary"} className={cn(
-            isConnected && "bg-success text-success-foreground"
+            "shrink-0 whitespace-nowrap",
+            isConnected && "bg-success/10 text-success border-success/20"
           )}>
             {isConnected ? "Verbunden" : "Nicht verbunden"}
           </Badge>

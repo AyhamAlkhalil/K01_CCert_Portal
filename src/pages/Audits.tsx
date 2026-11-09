@@ -36,6 +36,7 @@ import { de } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { PageHeader } from '@/components/PageHeader';
 import { MobileAuditCard } from '@/components/MobileAuditCard';
 
 type StatusFilter = 'all' | 'scheduled' | 'in-progress' | 'completed';
@@ -114,7 +115,7 @@ const AuditRow = ({
       </TableCell>
       {showType && (
         <TableCell>
-          <span className="text-sm">{AUDIT_TYPE_LABELS[audit.type]}</span>
+          <span className="text-sm whitespace-nowrap">{AUDIT_TYPE_LABELS[audit.type]}</span>
         </TableCell>
       )}
       <TableCell>
@@ -126,7 +127,7 @@ const AuditRow = ({
       <TableCell>
         <Badge
           variant={statusConfig.variant}
-          className={cn("text-[10px] px-1.5 py-0 h-5 whitespace-nowrap", statusConfig.className)}
+          className={cn("text-[11px] px-2 py-0 h-5 whitespace-nowrap", statusConfig.className)}
         >
           {statusConfig.label}
         </Badge>
@@ -158,7 +159,7 @@ const AuditRow = ({
               </span>
             </div>
           ) : (
-            <span className="text-[11px] text-green-600 font-medium whitespace-nowrap">✓ Erledigt</span>
+            <span className="text-[11px] text-success font-medium whitespace-nowrap">✓ Erledigt</span>
           )}
         </div>
       </TableCell>
@@ -178,7 +179,7 @@ interface GroupHeaderProps {
 }
 
 const GroupHeader = ({ title, count, icon }: GroupHeaderProps) => (
-  <div className="flex items-center gap-3 py-2.5 px-4 bg-muted/40 border-y border-border/50 sticky top-0 z-20 backdrop-blur-sm">
+  <div className="flex items-center gap-3 py-2.5 px-4 bg-secondary border-y border-border/50 sticky top-0 z-20">
     {icon}
     <span className="font-bold text-sm tracking-tight text-foreground">{title}</span>
     <Badge variant="secondary" className="text-[10px] h-4 px-1.5 font-bold uppercase tracking-wider">{count}</Badge>
@@ -388,26 +389,24 @@ const Audits = () => {
     <>
       <div className="h-full flex flex-col animate-fade-in">
         {/* Header - Not Sticky */}
-        <div className="p-4 sm:p-6 pb-2 shrink-0">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h1 className="text-xl sm:text-2xl font-bold text-foreground mb-1">Audits</h1>
-              <p className="text-sm text-muted-foreground">
-                {filteredAudits.length} Audit{filteredAudits.length !== 1 ? 's' : ''} gefunden
-              </p>
-            </div>
-            <Button className="gap-2 self-start sm:self-auto" onClick={() => setShowNewAuditDialog(true)}>
-              <Plus className="h-4 w-4" />
-              Neues Audit
-            </Button>
-          </div>
+        <div className="p-4 sm:p-6 lg:px-8 lg:pt-8 pb-3 sm:pb-3 shrink-0">
+          <PageHeader
+            title="Audits"
+            description={`${filteredAudits.length} Audit${filteredAudits.length !== 1 ? 's' : ''} gefunden`}
+            actions={
+              <Button className="gap-2" onClick={() => setShowNewAuditDialog(true)}>
+                <Plus className="h-4 w-4" />
+                Neues Audit
+              </Button>
+            }
+          />
         </div>
 
         {/* ═══ FILTER BAR — shrink-0 means it never scrolls away ═══ */}
-        <div className="shrink-0 bg-background/95 backdrop-blur-md border-b shadow-sm px-4 sm:px-6 py-3 space-y-3">
+        <div className="shrink-0 bg-background border-b border-border/70 px-4 sm:px-6 lg:px-8 py-3 space-y-3">
           {/* Row 1: Search + Filters */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
-            <div className="relative flex-1 min-w-0 sm:max-w-md">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:items-center">
+            <div className="relative flex-1 min-w-0 sm:min-w-[200px] sm:max-w-md">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Kunde suchen..."
@@ -422,7 +421,7 @@ const Audits = () => {
             <div className="flex items-center gap-2 flex-wrap">
               <Select value={clientStatusFilter} onValueChange={(v) => { setClientStatusFilter(v as 'all' | 'active' | 'inactive'); sessionStorage.setItem('audits-client-status-filter', v); }}>
                 <SelectTrigger className="w-[140px] h-9"><SelectValue /></SelectTrigger>
-                <SelectContent className="bg-background border shadow-lg z-[100]">
+                <SelectContent className="border shadow-lg z-[100]">
                   <SelectItem value="all">Alle Kunden</SelectItem>
                   <SelectItem value="active">Nur aktive</SelectItem>
                   <SelectItem value="inactive">Nur inaktive</SelectItem>
@@ -430,30 +429,30 @@ const Audits = () => {
               </Select>
               <Select value={consultantFilter} onValueChange={(v) => { setConsultantFilter(v); sessionStorage.setItem('audits-consultant-filter', v); }}>
                 <SelectTrigger className="w-[150px] h-9"><SelectValue placeholder="Berater..." /></SelectTrigger>
-                <SelectContent className="bg-background border shadow-lg z-[100]">
+                <SelectContent className="border shadow-lg z-[100]">
                   <SelectItem value="all">Alle Berater</SelectItem>
                   {consultants.map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
                 </SelectContent>
               </Select>
               <Select value={auditorFilter} onValueChange={(v) => { setAuditorFilter(v); sessionStorage.setItem('audits-auditor-filter', v); }}>
                 <SelectTrigger className="w-[150px] h-9"><SelectValue placeholder="Auditor..." /></SelectTrigger>
-                <SelectContent className="bg-background border shadow-lg z-[100]">
+                <SelectContent className="border shadow-lg z-[100]">
                   <SelectItem value="all">Alle Auditoren</SelectItem>
                   {auditors.map(a => <SelectItem key={a.id} value={a.id}>{a.name}</SelectItem>)}
                 </SelectContent>
               </Select>
               <Select value={certificationBodyFilter} onValueChange={(v) => { setCertificationBodyFilter(v); sessionStorage.setItem('audits-cert-body-filter', v); }}>
                 <SelectTrigger className="w-[150px] h-9"><SelectValue placeholder="Zertifizierer..." /></SelectTrigger>
-                <SelectContent className="bg-background border shadow-lg z-[100]">
+                <SelectContent className="border shadow-lg z-[100]">
                   <SelectItem value="all">Alle Zertifizierer</SelectItem>
                   {certificationBodies.map(cb => <SelectItem key={cb.id} value={cb.id}>{cb.name}</SelectItem>)}
                 </SelectContent>
               </Select>
-              <span className="text-sm text-muted-foreground hidden lg:inline">Gruppe:</span>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground hidden lg:inline">Gruppe:</span>
                 <Select value={groupBy} onValueChange={(v) => { setGroupBy(v as GroupBy); sessionStorage.setItem('audits-group-by', v); }}>
                   <SelectTrigger className="w-[140px] h-9"><SelectValue /></SelectTrigger>
-                  <SelectContent className="bg-background border shadow-lg z-[100]">
+                  <SelectContent className="border shadow-lg z-[100]">
                     <SelectItem value="month"><div className="flex items-center gap-2 text-xs"><Calendar className="h-3.5 w-3.5" /> Monat</div></SelectItem>
                     <SelectItem value="client"><div className="flex items-center gap-2 text-xs"><Users className="h-3.5 w-3.5" /> Kunde</div></SelectItem>
                     <SelectItem value="type"><div className="flex items-center gap-2 text-xs"><ClipboardCheck className="h-3.5 w-3.5" /> Auditart</div></SelectItem>
@@ -473,7 +472,7 @@ const Audits = () => {
           </div>
 
           {/* Row 2: Status Tabs */}
-          <div className="flex items-center gap-1 bg-muted/50 rounded-md p-1 w-fit">
+          <div className="flex items-center gap-1 bg-secondary rounded-lg p-1 w-fit max-w-full overflow-x-auto">
             {(['all', 'scheduled', 'in-progress', 'completed'] as StatusFilter[]).map((val) => {
               const labels: Record<StatusFilter, string> = { all: 'Alle', scheduled: 'Geplant', 'in-progress': 'In Bearbeitung', completed: 'Fertig' };
               return (
@@ -481,10 +480,10 @@ const Audits = () => {
                   key={val}
                   onClick={() => { setStatusFilter(val); sessionStorage.setItem('audits-status-filter', val); }}
                   className={cn(
-                    "px-3 py-1 text-[11px] font-bold rounded-sm transition-all uppercase tracking-wide",
+                    "px-3 py-1 text-xs font-medium rounded-md transition-all whitespace-nowrap",
                     statusFilter === val
-                      ? "bg-background text-primary shadow-sm"
-                      : "text-muted-foreground hover:text-foreground hover:bg-background/40"
+                      ? "bg-card text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
                   {labels[val]}
@@ -495,8 +494,8 @@ const Audits = () => {
         </div>
 
         {/* ═══ SCROLLABLE CONTENT ═══ */}
-        <div ref={scrollRef} className="flex-1 overflow-y-auto bg-muted/[0.03]">
-          <div className="p-4 sm:p-6 space-y-6">
+        <div ref={scrollRef} className="flex-1 overflow-y-auto">
+          <div className="p-4 sm:p-6 lg:px-8 space-y-6">
             {auditsError ? (
               <div className="text-center py-12">
                 <p className="text-destructive">Fehler beim Laden der Audits</p>
@@ -504,7 +503,7 @@ const Audits = () => {
             ) : isLoading ? (
               <div className="border rounded-lg overflow-hidden bg-background">
                 {!isMobile ? (
-                  <Table className="table-fixed w-full">
+                  <Table className="table-fixed w-full min-w-[1000px] [&_td]:px-3 [&_th]:px-3">
                     {/* ... (Existing Desktop Loading Table) ... */}
                   </Table>
                 ) : (
@@ -545,7 +544,7 @@ const Audits = () => {
                     )}
                     <div id={groupBy === 'month' ? `month-${group.key}` : undefined} className="scroll-mt-[200px]">
                       {!isMobile ? (
-                        <Table className="table-fixed w-full">
+                        <Table className="table-fixed w-full min-w-[1000px] [&_td]:px-3 [&_th]:px-3">
                           <TableHeader className="bg-muted/10">
                             <TableRow className="hover:bg-transparent">
                               <TableHead className="w-[40px]">
@@ -554,14 +553,14 @@ const Audits = () => {
                                   onCheckedChange={() => toggleAllInGroup(group.audits.map(a => a.id))}
                                 />
                               </TableHead>
-                              {groupBy !== 'client' && <TableHead className="text-left w-[15%] text-xs font-bold uppercase tracking-tight">Kunde</TableHead>}
-                              <TableHead className="text-center w-[10%] text-xs font-bold uppercase tracking-tight">Zert.</TableHead>
-                              {groupBy !== 'type' && <TableHead className="text-left w-[12%] text-xs font-bold uppercase tracking-tight">Art</TableHead>}
-                              <TableHead className="text-left w-[12%] text-xs font-bold uppercase tracking-tight">Datum</TableHead>
-                              <TableHead className="text-left w-[10%] text-xs font-bold uppercase tracking-tight">Status</TableHead>
-                              <TableHead className="text-left w-[12%] text-xs font-bold uppercase tracking-tight">Auditor</TableHead>
-                              <TableHead className="text-left w-[12%] text-xs font-bold uppercase tracking-tight">Zertifizierer</TableHead>
-                              <TableHead className="text-left w-[10%] text-xs font-bold uppercase tracking-tight">Check</TableHead>
+                              {groupBy !== 'client' && <TableHead className="text-left w-[13%]">Kunde</TableHead>}
+                              <TableHead className="text-center w-[8%]">Zert.</TableHead>
+                              {groupBy !== 'type' && <TableHead className="text-left w-[16%]">Art</TableHead>}
+                              <TableHead className="text-left w-[12.5%]">Datum</TableHead>
+                              <TableHead className="text-left w-[12.5%]">Status</TableHead>
+                              <TableHead className="text-left w-[11.5%]">Auditor</TableHead>
+                              <TableHead className="text-left w-[11%]">Zertifizierer</TableHead>
+                              <TableHead className="text-left w-[7.5%]">Check</TableHead>
                               <TableHead className="w-[40px] text-right pr-4"></TableHead>
                             </TableRow>
                           </TableHeader>
@@ -607,14 +606,14 @@ const Audits = () => {
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] animate-in fade-in slide-in-from-bottom-4 duration-300">
           <div className="bg-primary text-primary-foreground px-6 py-3 rounded-full shadow-2xl flex items-center gap-6 border border-primary-foreground/10 ring-4 ring-background">
             <div className="flex items-center gap-2 border-r border-primary-foreground/20 pr-6">
-              <span className="text-sm font-black">{selectedAuditIds.size}</span>
-              <span className="text-[11px] font-bold uppercase tracking-wider opacity-90">Ausgewählt</span>
+              <span className="text-sm font-semibold tabular-nums">{selectedAuditIds.size}</span>
+              <span className="text-xs font-medium opacity-90">Ausgewählt</span>
             </div>
             <div className="flex items-center gap-4">
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-primary-foreground hover:bg-primary-foreground/10 font-bold uppercase text-[10px] gap-2 h-8"
+                className="text-primary-foreground hover:text-primary-foreground hover:bg-primary-foreground/10 font-medium text-xs gap-2 h-8"
                 disabled={deleteAudit.isPending}
                 onClick={async () => {
                   if (!confirm(`${selectedAuditIds.size} Audit${selectedAuditIds.size !== 1 ? 's' : ''} wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.`)) return;
@@ -642,7 +641,7 @@ const Audits = () => {
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-primary-foreground hover:bg-primary-foreground/10 h-8 w-8 p-0 flex items-center justify-center rounded-full"
+                className="text-primary-foreground hover:text-primary-foreground hover:bg-primary-foreground/10 h-8 w-8 p-0 flex items-center justify-center rounded-full"
                 onClick={() => setSelectedAuditIds(new Set())}
               >
                 <X className="h-4 w-4" />

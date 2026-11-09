@@ -150,7 +150,7 @@ export const MoveClientDialog = ({ open, onOpenChange, client }: MoveClientDialo
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Unternehmensgruppe wählen..." />
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-lg z-50">
+              <SelectContent>
                 <SelectItem value="none">
                   <div className="flex items-center gap-2">
                     <X className="h-4 w-4 text-muted-foreground" />

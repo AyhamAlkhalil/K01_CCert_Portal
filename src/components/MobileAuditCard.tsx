@@ -74,7 +74,7 @@ export const MobileAuditCard = ({ audit, onClick }: MobileAuditCardProps) => {
              {pendingTasks > 0 ? (
                <span className="text-[10px] font-bold text-destructive">{pendingTasks} Offen</span>
              ) : (
-               <span className="text-[10px] font-bold text-green-600">Erledigt</span>
+               <span className="text-[10px] font-bold text-success">Erledigt</span>
              )}
              <ChevronRight className="h-4 w-4 text-muted-foreground" />
           </div>

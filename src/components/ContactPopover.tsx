@@ -99,7 +99,7 @@ export const ContactPopover = ({
                       onClick={() => copyToClipboard(contact.phone!, `phone-${contact.id}`)}
                     >
                       {copiedField === `phone-${contact.id}` ? (
-                        <Check className="h-3 w-3 text-green-500" />
+                        <Check className="h-3 w-3 text-success" />
                       ) : (
                         <Copy className="h-3 w-3" />
                       )}
@@ -120,7 +120,7 @@ export const ContactPopover = ({
                       onClick={() => copyToClipboard(contact.email!, `email-${contact.id}`)}
                     >
                       {copiedField === `email-${contact.id}` ? (
-                        <Check className="h-3 w-3 text-green-500" />
+                        <Check className="h-3 w-3 text-success" />
                       ) : (
                         <Copy className="h-3 w-3" />
                       )}
@@ -147,7 +147,7 @@ export const ContactPopover = ({
                     onClick={() => copyToClipboard(legacyPhone, 'phone')}
                   >
                     {copiedField === 'phone' ? (
-                      <Check className="h-3 w-3 text-green-500" />
+                      <Check className="h-3 w-3 text-success" />
                     ) : (
                       <Copy className="h-3 w-3" />
                     )}
@@ -168,7 +168,7 @@ export const ContactPopover = ({
                     onClick={() => copyToClipboard(legacyEmail, 'email')}
                   >
                     {copiedField === 'email' ? (
-                      <Check className="h-3 w-3 text-green-500" />
+                      <Check className="h-3 w-3 text-success" />
                     ) : (
                       <Copy className="h-3 w-3" />
                     )}

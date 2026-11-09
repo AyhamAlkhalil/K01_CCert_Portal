@@ -86,9 +86,9 @@ const escapeHtml = (value: unknown) => String(value ?? '')
   .replace(/'/g, '&#39;');
 
 const SEVERITY_COLORS: Record<string, string> = {
-  major: 'bg-red-100 text-red-800 border-red-300',
-  minor: 'bg-orange-100 text-orange-800 border-orange-300',
-  recommendation: 'bg-blue-100 text-blue-800 border-blue-300',
+  major: 'bg-destructive/10 text-destructive border-destructive/20',
+  minor: 'bg-warning/10 text-warning border-warning/20',
+  recommendation: 'bg-info/10 text-info border-info/20',
 };
 
 const ACCEPTED_TASK_DOC_TYPES = [
@@ -226,7 +226,7 @@ const TaskItem = memo(({ task, index, onToggle, onDelete, onEdit, onSetCompleted
   const [docsOpen, setDocsOpen] = useState(false);
 
   return (
-    <div className="border rounded-lg hover:bg-accent/50 transition-colors">
+    <div className="border border-border/70 rounded-xl hover:bg-accent/40 transition-colors">
     <div className="flex items-start gap-4 p-4">
       <Checkbox
         checked={task.status === 'completed'}
@@ -523,7 +523,7 @@ const AuditDetail = () => {
 
   return (
     <>
-      <div className="p-4 sm:p-8 space-y-4 sm:space-y-6 animate-fade-in">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
         {/* Back Navigation + Breadcrumb */}
         <div className="flex items-center gap-3 sm:gap-4">
           <Button
@@ -576,16 +576,16 @@ const AuditDetail = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-xl sm:text-2xl font-bold text-foreground">{AUDIT_TYPE_LABELS[audit.type]}</h1>
-            <p className="text-muted-foreground text-sm">
+            <h1 className="font-display text-[26px] font-medium leading-tight tracking-[-0.01em] text-foreground sm:text-[30px]">{AUDIT_TYPE_LABELS[audit.type]}</h1>
+            <p className="mt-1 text-muted-foreground text-sm tabular-nums">
               {format(new Date(audit.scheduled_date), 'dd.MM.yyyy', { locale: de })}
             </p>
           </div>
           <Badge
             variant={statusInfo.variant}
-            className={cn('flex items-center gap-1 text-sm px-4 py-2', statusInfo.className)}
+            className={cn('flex items-center gap-1.5 self-start text-[13px] px-3 py-1 sm:self-auto', statusInfo.className)}
           >
-            <Icon className="h-4 w-4" />
+            <Icon className="h-3.5 w-3.5" />
             {statusInfo.label}
           </Badge>
         </div>
@@ -600,14 +600,14 @@ const AuditDetail = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-foreground">
+                  <span className="text-[26px] font-semibold leading-none tracking-tight tabular-nums text-foreground">
                     {completedTasks} / {totalTasks}
                   </span>
                   <span className="text-sm text-muted-foreground">Aufgaben abgeschlossen</span>
                 </div>
-                <div className="w-full bg-secondary rounded-full h-3">
+                <div className="w-full bg-secondary rounded-full h-2">
                   <div
-                    className="bg-primary h-3 rounded-full transition-all duration-300"
+                    className="bg-primary h-2 rounded-full transition-all duration-300"
                     style={{ width: `${percentage}%` }}
                   />
                 </div>
@@ -800,7 +800,7 @@ const AuditDetail = () => {
                   <AlertDialogTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-full justify-start text-destructive"
+                      className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
                       disabled={audit.status === 'cancelled'}
                     >
                       <XCircle className="h-4 w-4 mr-2" />
@@ -826,7 +826,7 @@ const AuditDetail = () => {
                   <AlertDialogTrigger asChild>
                     <Button
                       variant="outline"
-                      className="w-full justify-start text-destructive"
+                      className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
                     >
                       <Trash2 className="h-4 w-4 mr-2" />
                       Audit löschen

@@ -34,6 +34,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { Plus, Pencil, Trash2, Search, User, Mail, Phone } from 'lucide-react';
+import { PageHeader } from '@/components/PageHeader';
 import { toast } from 'sonner';
 
 const Consultants = () => {
@@ -123,19 +124,17 @@ const Consultants = () => {
 
     return (
         <>
-            <div className="p-4 sm:p-8 space-y-4 sm:space-y-6">
-                <div className="flex items-center justify-between gap-3">
-                    <div>
-                        <h1 className="text-2xl sm:text-3xl font-bold">Berater</h1>
-                        <p className="text-muted-foreground text-sm">{consultants.length} Einträge</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <Button size="sm" onClick={openCreateDialog}>
-                            <Plus className="h-4 w-4 sm:mr-2" />
-                            <span className="hidden sm:inline">Neuer Berater</span>
+            <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
+                <PageHeader
+                    title="Berater"
+                    description={`${consultants.length} Einträge`}
+                    actions={
+                        <Button className="w-full sm:w-auto" onClick={openCreateDialog}>
+                            <Plus className="h-4 w-4" />
+                            Neuer Berater
                         </Button>
-                    </div>
-                </div>
+                    }
+                />
 
                 <div className="relative sm:max-w-md">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />

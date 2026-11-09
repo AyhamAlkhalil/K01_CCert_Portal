@@ -228,9 +228,9 @@ export const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) =>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Toggle: Company Group or Client */}
-          <div className="flex items-center gap-4 p-4 border rounded-lg bg-muted/30">
-            <Label className="text-sm font-medium">Was möchten Sie anlegen?</Label>
-            <div className="flex gap-2">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 p-4 border rounded-lg bg-muted/30">
+            <Label className="text-sm font-medium w-full sm:w-auto">Was möchten Sie anlegen?</Label>
+            <div className="flex flex-wrap gap-2">
               <Button
                 type="button"
                 variant={!isCompanyGroup ? "default" : "outline"}
@@ -273,7 +273,7 @@ export const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) =>
                 <SelectTrigger id="parent">
                   <SelectValue placeholder="Keine Gruppe (eigenständig)" />
                 </SelectTrigger>
-                <SelectContent className="bg-background border shadow-lg z-50">
+                <SelectContent>
                   <SelectItem value="none">Keine Gruppe (eigenständig)</SelectItem>
                   {sortedParentClients.map((parent) => (
                     <SelectItem key={parent.id} value={parent.id}>
@@ -327,7 +327,7 @@ export const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) =>
                   <SelectTrigger id="country">
                     <SelectValue placeholder="Land auswählen" />
                   </SelectTrigger>
-                  <SelectContent className="bg-background border shadow-lg z-50">
+                  <SelectContent>
                     {COUNTRIES.map((c) => (
                       <SelectItem key={c} value={c}>
                         {c}
@@ -360,7 +360,7 @@ export const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) =>
                     <SelectTrigger id="country">
                       <SelectValue placeholder="Land auswählen" />
                     </SelectTrigger>
-                    <SelectContent className="bg-background border shadow-lg z-50">
+                    <SelectContent>
                       {COUNTRIES.map((c) => (
                         <SelectItem key={c} value={c}>
                           {c}
@@ -377,7 +377,7 @@ export const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) =>
                     <SelectTrigger id="consultant">
                       <SelectValue placeholder="Berater auswählen" />
                     </SelectTrigger>
-                    <SelectContent className="bg-background border shadow-lg z-50">
+                    <SelectContent>
                       {consultants.filter(c => c.is_active).map((c) => (
                         <SelectItem key={c.id} value={c.id}>
                           {c.name}
@@ -467,7 +467,7 @@ export const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) =>
                   <SelectTrigger id="audit-mode">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="bg-background border shadow-lg z-50">
+                  <SelectContent>
                     <SelectItem value="on-site">Vor-Ort (Präsenz)</SelectItem>
                     <SelectItem value="remote">Remote (Online)</SelectItem>
                     <SelectItem value="hybrid">Hybrid</SelectItem>
@@ -524,7 +524,7 @@ export const NewClientDialog = ({ open, onOpenChange }: NewClientDialogProps) =>
                             <SelectTrigger className="h-8 text-xs flex-1">
                               <SelectValue placeholder="Kein Auditor" />
                             </SelectTrigger>
-                            <SelectContent className="bg-background border shadow-lg z-50">
+                            <SelectContent>
                               <SelectItem value="none">Kein Auditor</SelectItem>
                               {auditors.map((auditor) => (
                                 <SelectItem key={auditor.id} value={auditor.id}>

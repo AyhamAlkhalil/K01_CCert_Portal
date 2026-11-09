@@ -72,6 +72,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { toast } from 'sonner';
+import { PageHeader } from '@/components/PageHeader';
 import { exportClientsToExcel } from '@/lib/clientExport';
 
 
@@ -79,20 +80,20 @@ const AUDIT_MODE_CONFIG = {
   remote: {
     label: 'Remote',
     Icon: Globe,
-    modeBadge: 'bg-blue-50 text-blue-700 border-blue-200',
-    certBadge: 'bg-blue-100 text-blue-800 border-blue-300',
+    modeBadge: 'bg-info/10 text-info border-info/20',
+    certBadge: 'bg-info/10 text-info border-info/20',
   },
   hybrid: {
     label: 'Hybrid',
     Icon: Monitor,
-    modeBadge: 'bg-purple-50 text-purple-700 border-purple-200',
-    certBadge: 'bg-purple-100 text-purple-800 border-purple-300',
+    modeBadge: 'bg-violet-500/10 text-violet-700 border-violet-500/20',
+    certBadge: 'bg-violet-500/10 text-violet-700 border-violet-500/20',
   },
   'on-site': {
     label: 'Präsenz',
     Icon: Building2,
-    modeBadge: 'bg-slate-50 text-slate-600 border-slate-200',
-    certBadge: 'bg-slate-100 text-slate-700 border-slate-300',
+    modeBadge: 'bg-muted text-muted-foreground border-border',
+    certBadge: 'bg-muted text-muted-foreground border-border',
   },
 } as const;
 
@@ -371,8 +372,8 @@ const Clients = () => {
           key={`${row.clientId}-${idx}`}
           className={cn(
             "flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 pl-12 sm:pl-16 pr-4 py-3 sm:py-2 text-sm border-t border-border/30 hover:bg-muted/30 cursor-pointer transition-colors",
-            row.certifications.some(c => c.status === 'expired') && "bg-red-50/50 dark:bg-red-950/10",
-            row.certifications.some(c => c.status === 'suspended') && "bg-orange-50/50 dark:bg-orange-950/10"
+            row.certifications.some(c => c.status === 'expired') && "bg-destructive/[0.03]",
+            row.certifications.some(c => c.status === 'suspended') && "bg-warning/[0.04]"
           )}
           onClick={() => navigate(`/certifications/${row.primaryCertificationId}`)}
         >
@@ -400,12 +401,12 @@ const Clients = () => {
               <div className="flex gap-1.5">
                 {Array.from(new Set(row.certifications.map(c => c.status).filter(Boolean))).map((status, i) => {
                   const statusColors: Record<string, string> = {
-                    active: 'bg-green-100/80 text-green-800 border-green-200',
-                    valid: 'bg-green-100/80 text-green-800 border-green-200',
-                    suspended: 'bg-orange-100/80 text-orange-800 border-orange-200',
-                    expired: 'bg-red-100/80 text-red-800 border-red-200',
-                    pending: 'bg-yellow-100/80 text-yellow-800 border-yellow-200',
-                    withdrawn: 'bg-gray-100/80 text-gray-800 border-gray-200',
+                    active: 'bg-success/10 text-success border-success/20',
+                    valid: 'bg-success/10 text-success border-success/20',
+                    suspended: 'bg-warning/10 text-warning border-warning/20',
+                    expired: 'bg-destructive/10 text-destructive border-destructive/20',
+                    pending: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+                    withdrawn: 'bg-muted text-muted-foreground border-border',
                   };
                   const statusLabel: Record<string, string> = {
                     active: 'Aktiv', valid: 'Gültig', suspended: 'Ausgesetzt', expired: 'Abgelaufen', pending: 'Ausstehend', withdrawn: 'Zurückgezogen',
@@ -581,22 +582,18 @@ const Clients = () => {
 
   return (
     <>
-      <div className="p-4 sm:p-8 space-y-4 sm:space-y-6">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold">Kunden</h1>
-            <p className="text-muted-foreground text-sm">
-              {countryGroups.reduce((sum, cg) => sum + cg.companyGroups.length, 0)} Unternehmensgruppen • {clients.filter(c => c.client_number !== null).length} Kunden
-            </p>
-          </div>
-          <div className="flex gap-2 flex-wrap">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
+        <PageHeader
+          title="Kunden"
+          description={`${countryGroups.reduce((sum, cg) => sum + cg.companyGroups.length, 0)} Unternehmensgruppen • ${clients.filter(c => c.client_number !== null).length} Kunden`}
+          actions={
+            <>
             <Button size="sm" variant="outline" disabled={clients.length === 0} onClick={() => {
               exportClientsToExcel(clients);
               toast.success(`${clients.length} Kunden exportiert`);
             }}>
-              <Download className="h-4 w-4 sm:mr-2" />
-              <span className="hidden sm:inline text-xs sm:text-sm">Excel-Export</span>
+              <Download className="h-4 w-4" />
+              <span className="hidden sm:inline">Excel-Export</span>
             </Button>
             <Button size="sm" variant="outline" onClick={() => {
               const allCountryIds = new Set(countryGroups.map(cg => cg.country));
@@ -609,7 +606,7 @@ const Clients = () => {
               sessionStorage.setItem('clients-expanded-groups', JSON.stringify([...allGroupIds]));
               sessionStorage.setItem('clients-expanded-clients', JSON.stringify([...allClientIds]));
             }}>
-              <span className="text-xs sm:text-sm">Alle aufklappen</span>
+              Alle aufklappen
             </Button>
             <Button size="sm" variant="outline" onClick={() => {
               setExpandedCountries(new Set());
@@ -619,14 +616,15 @@ const Clients = () => {
               sessionStorage.setItem('clients-expanded-groups', JSON.stringify([]));
               sessionStorage.setItem('clients-expanded-clients', JSON.stringify([]));
             }}>
-              <span className="text-xs sm:text-sm">Alle zuklappen</span>
+              Alle zuklappen
             </Button>
-            <Button size="sm" className="sm:size-default" onClick={() => setShowNewClientDialog(true)}>
-              <Plus className="h-4 w-4 sm:mr-2" />
+            <Button size="sm" onClick={() => setShowNewClientDialog(true)}>
+              <Plus className="h-4 w-4" />
               <span className="hidden sm:inline">Neuer Kunde</span>
             </Button>
-          </div>
-        </div>
+            </>
+          }
+        />
 
         <NewClientDialog open={showNewClientDialog} onOpenChange={setShowNewClientDialog} />
 
@@ -649,7 +647,7 @@ const Clients = () => {
                 setSearchQuery(e.target.value);
                 sessionStorage.setItem('clients-search-query', e.target.value);
               }}
-              className="pl-10 h-11 sm:h-10 bg-background/50 border-border/60 focus:bg-background transition-all"
+              className="pl-10 h-11 sm:h-10"
             />
           </div>
 
@@ -662,13 +660,13 @@ const Clients = () => {
                 sessionStorage.setItem('clients-auditor-filter', val);
               }}
             >
-              <SelectTrigger className="h-10 sm:h-9 bg-background/50">
+              <SelectTrigger className="h-10 sm:h-9">
                 <div className="flex items-center gap-2 truncate">
                   <User className="h-4 w-4 text-muted-foreground shrink-0" />
                   <SelectValue placeholder="Auditor" />
                 </div>
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-xl z-50">
+              <SelectContent>
                 <SelectItem value="all">Alle Auditoren</SelectItem>
                 <SelectItem value="none">
                   <span className="flex items-center gap-1.5 text-warning">
@@ -692,13 +690,13 @@ const Clients = () => {
                 sessionStorage.setItem('clients-status-filter', filter);
               }}
             >
-              <SelectTrigger className="h-10 sm:h-9 bg-background/50">
+              <SelectTrigger className="h-10 sm:h-9">
                 <div className="flex items-center gap-2 truncate">
                   <Eye className="h-4 w-4 text-muted-foreground shrink-0" />
                   <SelectValue />
                 </div>
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-xl z-50">
+              <SelectContent>
                 <SelectItem value="all">Alle Stati</SelectItem>
                 <SelectItem value="active">Nur aktive</SelectItem>
                 <SelectItem value="inactive">Nur inaktive</SelectItem>
@@ -713,13 +711,13 @@ const Clients = () => {
                 sessionStorage.setItem('clients-consultant-filter', val);
               }}
             >
-              <SelectTrigger className="h-10 sm:h-9 bg-background/50">
+              <SelectTrigger className="h-10 sm:h-9">
                 <div className="flex items-center gap-2 truncate">
                   <User className="h-4 w-4 text-muted-foreground shrink-0" />
                   <SelectValue placeholder="Berater" />
                 </div>
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-xl z-50">
+              <SelectContent>
                 <SelectItem value="all">Alle Berater</SelectItem>
                 <SelectItem value="none">
                   <span className="flex items-center gap-1.5 text-warning">
@@ -1099,12 +1097,12 @@ const Clients = () => {
                                                       )}
                                                       {row.certifications.map(c => c.status).filter(Boolean).map((status, i) => {
                                                         const statusColors: Record<string, string> = {
-                                                          active: 'bg-green-100 text-green-800 border-green-300',
-                                                          valid: 'bg-green-100 text-green-800 border-green-300',
-                                                          suspended: 'bg-orange-100 text-orange-800 border-orange-300',
-                                                          expired: 'bg-red-100 text-red-800 border-red-300',
-                                                          pending: 'bg-yellow-100 text-yellow-800 border-yellow-300',
-                                                          withdrawn: 'bg-gray-100 text-gray-800 border-gray-300',
+                                                          active: 'bg-success/10 text-success border-success/20',
+                                                          valid: 'bg-success/10 text-success border-success/20',
+                                                          suspended: 'bg-warning/10 text-warning border-warning/20',
+                                                          expired: 'bg-destructive/10 text-destructive border-destructive/20',
+                                                          pending: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+                                                          withdrawn: 'bg-muted text-muted-foreground border-border',
                                                         };
                                                         const statusLabel: Record<string, string> = {
                                                           active: 'Aktiv', valid: 'Gültig', suspended: 'Ausgesetzt', expired: 'Abgelaufen', pending: 'Ausstehend', withdrawn: 'Zurückgezogen',

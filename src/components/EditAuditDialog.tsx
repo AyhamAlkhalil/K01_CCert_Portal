@@ -187,7 +187,7 @@ export function EditAuditDialog({ audit, open, onOpenChange }: EditAuditDialogPr
                 const diff = differenceInCalendarDays(parsed, originalDate);
                 if (diff !== 0 && auditTasks.length > 0) {
                   return (
-                    <p className="text-xs text-amber-600 bg-amber-50 p-2 rounded border border-amber-200 mt-2 flex items-center gap-2">
+                    <p className="text-xs text-warning bg-warning/5 p-2 rounded-lg border border-warning/20 mt-2 flex items-center gap-2">
                       <CalendarIcon className="h-3 w-3" />
                       Hinweis: {auditTasks.length} Aufgabenfristen werden automatisch um {Math.abs(diff)} Tage {diff > 0 ? 'nach hinten' : 'nach vorne'} verschoben.
                     </p>
@@ -223,7 +223,7 @@ export function EditAuditDialog({ audit, open, onOpenChange }: EditAuditDialogPr
               <SelectTrigger>
                 <SelectValue placeholder="Auditor wählen..." />
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-lg z-50">
+              <SelectContent>
                 <SelectItem value="__none__">— Kein Auditor —</SelectItem>
                 {sortedAuditors.map((auditor) => (
                   <SelectItem key={auditor.id} value={auditor.id}>
@@ -241,7 +241,7 @@ export function EditAuditDialog({ audit, open, onOpenChange }: EditAuditDialogPr
               <SelectTrigger>
                 <SelectValue placeholder="Zertifizierer wählen..." />
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-lg z-50">
+              <SelectContent>
                 <SelectItem value="__none__">— Kein Zertifizierer —</SelectItem>
                 {certificationBodies.map((body) => (
                   <SelectItem key={body.id} value={body.id}>

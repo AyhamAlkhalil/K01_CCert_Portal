@@ -48,7 +48,7 @@ export const AuditorPopover = ({ auditor }: AuditorPopoverProps) => {
       >
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <ClipboardCheck className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+            <ClipboardCheck className="h-4 w-4 text-warning dark:text-amber-400" />
             <p className="font-semibold text-amber-900 dark:text-amber-200">Auditor</p>
           </div>
           
@@ -68,7 +68,7 @@ export const AuditorPopover = ({ auditor }: AuditorPopoverProps) => {
                   onClick={() => copyToClipboard(auditor.phone!, 'phone')}
                 >
                   {copiedField === 'phone' ? (
-                    <Check className="h-3 w-3 text-green-500" />
+                    <Check className="h-3 w-3 text-success" />
                   ) : (
                     <Copy className="h-3 w-3" />
                   )}
@@ -89,7 +89,7 @@ export const AuditorPopover = ({ auditor }: AuditorPopoverProps) => {
                   onClick={() => copyToClipboard(auditor.email!, 'email')}
                 >
                   {copiedField === 'email' ? (
-                    <Check className="h-3 w-3 text-green-500" />
+                    <Check className="h-3 w-3 text-success" />
                   ) : (
                     <Copy className="h-3 w-3" />
                   )}

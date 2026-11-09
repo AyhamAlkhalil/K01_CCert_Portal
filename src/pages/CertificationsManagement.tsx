@@ -49,6 +49,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { Plus, Pencil, Trash2, Award, Loader2, ListOrdered, GripVertical, X } from 'lucide-react';
 import { AUDIT_TYPE_LABELS } from '@/lib/constants';
+import { PageHeader } from '@/components/PageHeader';
 import { Database } from '@/integrations/supabase/types';
 
 type AuditType = Database['public']['Enums']['audit_type'];
@@ -347,19 +348,17 @@ export default function CertificationsManagement() {
 
   return (
     <>
-      <div className="p-4 sm:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 sm:mb-8 bg-card/50 p-4 rounded-2xl border border-border/40 shadow-sm">
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Zertifizierungen</h1>
-            <p className="text-muted-foreground text-sm font-medium mt-1">
-              Verwalten Sie die verfügbaren Zertifizierungen
-            </p>
-          </div>
-          <Button size="lg" onClick={openCreateDialog} className="w-full sm:w-auto shadow-sm">
-            <Plus className="h-5 w-5 mr-2" />
-            Neue Zertifizierung
-          </Button>
-        </div>
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
+        <PageHeader
+          title="Zertifizierungen"
+          description="Verwalten Sie die verfügbaren Zertifizierungen"
+          actions={
+            <Button onClick={openCreateDialog} className="w-full sm:w-auto">
+              <Plus className="h-4 w-4" />
+              Neue Zertifizierung
+            </Button>
+          }
+        />
 
         {isLoading ? (
           <div className="flex items-center justify-center py-12">

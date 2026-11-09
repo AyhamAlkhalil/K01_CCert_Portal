@@ -84,9 +84,9 @@ const SEVERITY_LABELS: Record<string, string> = {
 };
 
 const SEVERITY_COLORS: Record<string, string> = {
-  major: 'bg-red-100 text-red-800 border-red-300',
-  minor: 'bg-orange-100 text-orange-800 border-orange-300',
-  recommendation: 'bg-blue-100 text-blue-800 border-blue-300',
+  major: 'bg-destructive/10 text-destructive border-destructive/20',
+  minor: 'bg-warning/10 text-warning border-warning/20',
+  recommendation: 'bg-info/10 text-info border-info/20',
 };
 
 export const CertificationAuditDialog = ({ 
@@ -284,7 +284,7 @@ export const CertificationAuditDialog = ({
               <SelectTrigger id="audit-type">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-lg z-50">
+              <SelectContent>
                 {auditTypeOptions.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
@@ -406,7 +406,7 @@ export const CertificationAuditDialog = ({
               <SelectTrigger id="status">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-lg z-50">
+              <SelectContent>
                 {AUDIT_STATUS_OPTIONS.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
@@ -423,7 +423,7 @@ export const CertificationAuditDialog = ({
               <SelectTrigger id="auditor">
                 <SelectValue placeholder="Auditor auswählen" />
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-lg z-50">
+              <SelectContent>
                 <SelectItem value="none">Kein Auditor</SelectItem>
                 {auditors.map((auditor) => (
                   <SelectItem key={auditor.id} value={auditor.id}>
@@ -442,7 +442,7 @@ export const CertificationAuditDialog = ({
               <SelectTrigger id="cert-body">
                 <SelectValue placeholder="Zertifizierer auswählen" />
               </SelectTrigger>
-              <SelectContent className="bg-background border shadow-lg z-50">
+              <SelectContent>
                 <SelectItem value="none">Kein Zertifizierer</SelectItem>
                 {certificationBodies.map((body) => (
                   <SelectItem key={body.id} value={body.id}>

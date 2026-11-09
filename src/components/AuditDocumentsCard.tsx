@@ -28,10 +28,10 @@ function formatFileSize(bytes: number | null): string {
 
 function fileIcon(mimeType: string | null) {
   if (!mimeType) return <FileText className="h-4 w-4 text-muted-foreground" />;
-  if (mimeType.startsWith('image/')) return <FileText className="h-4 w-4 text-blue-500" />;
-  if (mimeType.includes('pdf')) return <FileText className="h-4 w-4 text-red-500" />;
+  if (mimeType.startsWith('image/')) return <FileText className="h-4 w-4 text-info" />;
+  if (mimeType.includes('pdf')) return <FileText className="h-4 w-4 text-destructive" />;
   if (mimeType.includes('spreadsheet') || mimeType.includes('excel') || mimeType.includes('csv'))
-    return <FileText className="h-4 w-4 text-green-600" />;
+    return <FileText className="h-4 w-4 text-success" />;
   return <FileText className="h-4 w-4 text-muted-foreground" />;
 }
 

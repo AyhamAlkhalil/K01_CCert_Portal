@@ -79,6 +79,7 @@ import {
   useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import { PageHeader } from '@/components/PageHeader';
 import { CSS } from '@dnd-kit/utilities';
 
 const AUDIT_TYPE_LABELS: Record<string, string> = {
@@ -89,10 +90,10 @@ const AUDIT_TYPE_LABELS: Record<string, string> = {
 };
 
 const AUDIT_TYPE_COLORS: Record<string, string> = {
-  'initial': 'bg-blue-100 text-blue-800',
-  'surveillance': 'bg-yellow-100 text-yellow-800',
-  'recertification': 'bg-green-100 text-green-800',
-  'six-month': 'bg-purple-100 text-purple-800',
+  'initial': 'bg-info/10 text-info border-info/20',
+  'surveillance': 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+  'recertification': 'bg-success/10 text-success border-success/20',
+  'six-month': 'bg-violet-500/10 text-violet-700 border-violet-500/20',
 };
 
 // Sortable Task Item Component
@@ -215,7 +216,7 @@ function SortableTaskItem({
             <Button
               variant="ghost"
               size="icon"
-              className="h-8 w-8 text-destructive"
+              className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
               onClick={() => onDelete(task)}
             >
               <Trash2 className="h-4 w-4" />
@@ -553,7 +554,7 @@ function EditableTemplateCard({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-8 w-8 text-destructive"
+                  className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
                   onClick={() => onDelete(template)}
                 >
                   <Trash2 className="h-4 w-4" />
@@ -642,13 +643,11 @@ export default function AuditTemplates() {
 
   return (
     <>
-      <div className="p-4 sm:p-8">
-        <div className="mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Audit-Vorlagen</h1>
-          <p className="text-muted-foreground mt-1">
-            Definieren Sie Aufgaben-Vorlagen für verschiedene Audit-Typen pro Zertifizierung
-          </p>
-        </div>
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
+        <PageHeader
+          title="Audit-Vorlagen"
+          description="Definieren Sie Aufgaben-Vorlagen für verschiedene Audit-Typen pro Zertifizierung"
+        />
 
         <Card>
           <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 space-y-0 pb-4">

@@ -1,51 +1,23 @@
-import { useEffect, useState } from 'react';
-
-interface FloatingPaper {
-  id: number;
-  left: number;
-  delay: number;
-  duration: number;
-  size: number;
-  rotation: number;
-}
+const PAPERS = [
+  { left: 6, delay: -4, duration: 46, size: 44, rotation: 12 },
+  { left: 22, delay: -31, duration: 58, size: 60, rotation: -18 },
+  { left: 38, delay: -12, duration: 52, size: 36, rotation: 24 },
+  { left: 54, delay: -40, duration: 64, size: 52, rotation: -8 },
+  { left: 68, delay: -22, duration: 48, size: 40, rotation: 16 },
+  { left: 84, delay: -50, duration: 60, size: 56, rotation: -22 },
+];
 
 export default function AuthBackground() {
-  const [papers, setPapers] = useState<FloatingPaper[]>([]);
-
-  useEffect(() => {
-    const generatePapers = () => {
-      const newPapers: FloatingPaper[] = [];
-      for (let i = 0; i < 15; i++) {
-        newPapers.push({
-          id: i,
-          left: Math.random() * 100,
-          delay: Math.random() * 20,
-          duration: 15 + Math.random() * 20,
-          size: 30 + Math.random() * 40,
-          rotation: Math.random() * 360,
-        });
-      }
-      setPapers(newPapers);
-    };
-    generatePapers();
-  }, []);
-
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
-      {/* Dark blue gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(220,50%,15%)] via-[hsl(220,50%,12%)] to-[hsl(220,50%,8%)]" />
-      
-      {/* Subtle animated gradient overlay */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-t from-[hsl(220,60%,20%)] via-transparent to-transparent animate-pulse" 
-             style={{ animationDuration: '8s' }} />
-      </div>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(212,56%,22%)] via-[hsl(214,54%,14%)] to-[hsl(216,58%,9%)]" />
+      <div className="absolute -left-1/4 -top-1/4 h-[70%] w-[90%] rounded-full bg-[hsl(205,70%,45%)] opacity-[0.12] blur-[110px]" />
+      <div className="absolute -bottom-1/4 -right-1/4 h-[60%] w-[70%] rounded-full bg-[hsl(158,52%,50%)] opacity-[0.08] blur-[110px]" />
 
-      {/* Floating paper sheets */}
-      {papers.map((paper) => (
+      {PAPERS.map((paper) => (
         <div
-          key={paper.id}
-          className="absolute opacity-[0.06] animate-float-paper"
+          key={paper.left}
+          className="absolute animate-float-paper"
           style={{
             left: `${paper.left}%`,
             animationDelay: `${paper.delay}s`,
@@ -60,16 +32,11 @@ export default function AuthBackground() {
             xmlns="http://www.w3.org/2000/svg"
             style={{ transform: `rotate(${paper.rotation}deg)` }}
           >
-            {/* Paper sheet with folded corner */}
             <path
               d="M0 4C0 1.79086 1.79086 0 4 0H28L40 12V52C40 54.2091 38.2091 56 36 56H4C1.79086 56 0 54.2091 0 52V4Z"
               fill="hsl(210, 40%, 98%)"
             />
-            <path
-              d="M28 0L40 12H32C29.7909 12 28 10.2091 28 8V0Z"
-              fill="hsl(210, 30%, 85%)"
-            />
-            {/* Text lines */}
+            <path d="M28 0L40 12H32C29.7909 12 28 10.2091 28 8V0Z" fill="hsl(210, 30%, 85%)" />
             <rect x="6" y="18" width="28" height="2" rx="1" fill="hsl(220, 30%, 75%)" />
             <rect x="6" y="24" width="24" height="2" rx="1" fill="hsl(220, 30%, 75%)" />
             <rect x="6" y="30" width="26" height="2" rx="1" fill="hsl(220, 30%, 75%)" />
@@ -78,9 +45,6 @@ export default function AuthBackground() {
           </svg>
         </div>
       ))}
-
-      {/* Soft vignette effect */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(220,50%,8%)_100%)] opacity-40" />
     </div>
   );
 }

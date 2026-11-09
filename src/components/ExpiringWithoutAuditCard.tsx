@@ -36,7 +36,7 @@ const CardShell = ({ children, count }: { children: React.ReactNode; count?: num
           Ablauf ohne Anschlussaudit
         </div>
         {count !== undefined && count > 0 && (
-          <Badge variant="destructive" className="text-[10px] px-1.5 py-0">
+          <Badge variant="destructive" className="text-[11px] px-2 py-0 font-medium">
             {count} offen
           </Badge>
         )}
@@ -79,7 +79,7 @@ export const ExpiringWithoutAuditCard = () => {
     return (
       <CardShell>
         <div className="text-center py-6">
-          <ShieldCheck className="h-10 w-10 mx-auto text-green-500/40 mb-2" />
+          <ShieldCheck className="h-10 w-10 mx-auto text-success/40 mb-2" />
           <p className="text-sm text-muted-foreground">
             Für alle ablaufenden Zertifizierungen ist ein Audit geplant.
           </p>
@@ -92,17 +92,17 @@ export const ExpiringWithoutAuditCard = () => {
     <CardShell count={risks.length}>
       <div className="flex flex-wrap gap-1.5 mb-3">
         {stats.expiring > 0 && (
-          <Badge variant="destructive" className="text-[10px] px-1.5 py-0">
+          <Badge variant="destructive" className="text-[11px] px-2 py-0">
             {stats.expiring} läuft bald ab
           </Badge>
         )}
         {stats.expired > 0 && (
-          <Badge variant="destructive" className="text-[10px] px-1.5 py-0 opacity-80">
+          <Badge variant="destructive" className="text-[11px] px-2 py-0">
             {stats.expired} bereits abgelaufen
           </Badge>
         )}
         {stats.noDate > 0 && (
-          <Badge variant="outline" className="text-[10px] px-1.5 py-0">
+          <Badge variant="outline" className="text-[11px] px-2 py-0">
             {stats.noDate} ohne Ablaufdatum
           </Badge>
         )}
@@ -112,11 +112,11 @@ export const ExpiringWithoutAuditCard = () => {
         <Table>
           <TableHeader>
             <TableRow className="hover:bg-transparent">
-              <TableHead className="text-xs h-8 w-8 px-2"></TableHead>
-              <TableHead className="text-xs h-8">Kunde</TableHead>
-              <TableHead className="text-xs h-8">Zertifikat</TableHead>
-              <TableHead className="text-xs h-8">Gültig bis</TableHead>
-              <TableHead className="text-xs h-8 text-right">Frist</TableHead>
+              <TableHead className="h-9 w-8 px-2"></TableHead>
+              <TableHead className="h-9">Kunde</TableHead>
+              <TableHead className="h-9">Zertifikat</TableHead>
+              <TableHead className="h-9">Gültig bis</TableHead>
+              <TableHead className="h-9 text-right">Frist</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -126,7 +126,7 @@ export const ExpiringWithoutAuditCard = () => {
               return (
                 <TableRow
                   key={risk.clientCertificationId}
-                  className={`cursor-pointer text-xs ${risk.type === 'expiring' ? 'bg-destructive/[0.04]' : ''}`}
+                  className={`cursor-pointer text-[13px] ${risk.type === 'expiring' ? 'bg-destructive/[0.04]' : ''}`}
                   onClick={() => navigate(`/certifications/${risk.clientCertificationId}`)}
                 >
                   <TableCell className="py-2 px-2 w-8">
@@ -142,7 +142,7 @@ export const ExpiringWithoutAuditCard = () => {
                     {risk.validUntil ? format(risk.validUntil, 'dd.MM.yyyy') : '–'}
                   </TableCell>
                   <TableCell className="py-2 text-right">
-                    <Badge variant={config.badgeVariant} className="text-[10px] px-1.5 py-0 whitespace-nowrap">
+                    <Badge variant={config.badgeVariant} className="text-[11px] px-2 py-0 whitespace-nowrap">
                       {formatDeadline(risk)}
                     </Badge>
                   </TableCell>

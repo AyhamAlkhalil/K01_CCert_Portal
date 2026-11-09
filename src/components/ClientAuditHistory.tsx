@@ -32,9 +32,9 @@ const SEVERITY_LABELS: Record<string, string> = {
 };
 
 const SEVERITY_COLORS: Record<string, string> = {
-  major: 'bg-red-100 text-red-800 border-red-300',
-  minor: 'bg-orange-100 text-orange-800 border-orange-300',
-  recommendation: 'bg-blue-100 text-blue-800 border-blue-300',
+  major: 'bg-destructive/10 text-destructive border-destructive/20',
+  minor: 'bg-warning/10 text-warning border-warning/20',
+  recommendation: 'bg-info/10 text-info border-info/20',
 };
 
 const FindingsList = ({ findings, auditId }: { findings: DbAuditTask[]; auditId: string }) => {

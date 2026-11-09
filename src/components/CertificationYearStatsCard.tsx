@@ -53,25 +53,27 @@ export const CertificationYearStatsCard = () => {
 
   return (
     <Card className="flex flex-col h-full">
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center justify-between text-base">
-          <div className="flex items-center gap-2 text-primary">
-            <ShieldCheck className="h-4 w-4" />
+      <CardHeader className="p-5 pb-3">
+        <CardTitle className="flex items-start justify-between gap-3 text-[15px]">
+          <span className="flex items-center gap-2.5">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/[0.08] text-primary">
+              <ShieldCheck className="h-4 w-4" />
+            </span>
             Zertifikate
-          </div>
-          <span className="text-2xl font-bold">{stats.total}</span>
+          </span>
+          <span className="text-[26px] font-semibold leading-none tracking-tight tabular-nums">{stats.total}</span>
         </CardTitle>
-        <p className="text-[10px] text-muted-foreground -mt-1">Historie {stats.year}</p>
+        <p className="text-xs text-muted-foreground">Historie {stats.year}</p>
       </CardHeader>
-      <CardContent className="pt-0 flex-1">
-        <div className="space-y-1.5 mt-2">
+      <CardContent className="px-5 pb-5 pt-0 flex-1">
+        <div className="space-y-2 mt-1">
           {stats.types.length === 0 ? (
-            <div className="text-[11px] text-muted-foreground italic">Keine Daten im ausgewählten Jahr</div>
+            <div className="text-xs text-muted-foreground">Keine Daten im ausgewählten Jahr</div>
           ) : (
             stats.types.map((type) => (
-              <div key={type.name} className="flex items-center justify-between gap-3 text-xs">
+              <div key={type.name} className="flex items-center justify-between gap-3 text-[13px]">
                 <span className="min-w-0 truncate text-muted-foreground">{type.name}</span>
-                <span className="font-semibold tabular-nums">{type.count}</span>
+                <span className="font-medium tabular-nums">{type.count}</span>
               </div>
             ))
           )}

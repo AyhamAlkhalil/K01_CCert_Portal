@@ -96,6 +96,7 @@ Every entity follows the same pattern:
 | `/audits/:id` | `AuditDetail.tsx` | `useAuditTasks(auditId)` | |
 | `/tasks` | `Tasks.tsx` | `useAllAuditTasks()` → `DbAuditTaskFull` | |
 | `/clients` | `Clients.tsx` | `useClients()` | |
+| `/about` | `About.tsx` | – | Statische Seite „Über diese Software“: Support, Entwickler |
 
 ### Layout: Scroll-Ausnahmen
 Pfade `/audits` und `/tasks` werden **nicht** in `scrollRef`-div gewrapped — sie verwalten ihren Scroll intern. Bei neuen Seiten mit eigenem Scroll: in `Layout.tsx` der Bedingung `['/audits', '/tasks'].includes(location.pathname)` hinzufügen.
@@ -329,6 +330,9 @@ Beim Anpassen des System-Prompts (`buildSystemPrompt` in der Edge Function) folg
 - Business logic in `src/lib/` or hooks, not in page/component files
 - `src/lib/constants.ts` — alle Display-Labels und Config-Objekte für audit types, statuses, urgency
 - Toast notifications via `sonner` (`import { toast } from "sonner"`)
+- Seitenkopf immer über `src/components/PageHeader.tsx`; Seitenrand `p-4 sm:p-6 lg:p-8`
+- Statusfarben nur über Tokens im Muster `bg-success/10 text-success border-success/20` (`success`, `warning`, `destructive`, `info`), keine festen Tailwind-Farben wie `bg-green-100`
+- Support-Adresse und Entwickler-Link stehen auf `/about` (`src/pages/About.tsx`) und im Login (`src/pages/Auth.tsx`)
 
 ### logActivity()
 ```typescript

@@ -26,6 +26,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
 import { useScrollPersistence } from '@/hooks/useScrollPersistence';
 import { AuditType } from '@/types/audit';
+import { PageHeader } from '@/components/PageHeader';
 import { cn } from '@/lib/utils';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -259,8 +260,8 @@ const TaskGroup = memo(({ label, tasks, selectedIds, onSelect, onSelectAll, onCo
   const someSelected = tasks.some(t => selectedIds.has(t.id));
 
   return (
-    <div className="mb-4 rounded-lg border border-border bg-card overflow-hidden">
-      <div className="flex items-center gap-2 px-4 py-2.5 bg-muted/40">
+    <div className="mb-4 rounded-xl border border-border/80 bg-card shadow-sm overflow-hidden">
+      <div className="group flex items-center gap-2 px-4 py-2.5 bg-muted/40">
         {/* Gruppe alle auswählen */}
         <div onClick={(e) => e.stopPropagation()}>
           <Checkbox
@@ -276,7 +277,7 @@ const TaskGroup = memo(({ label, tasks, selectedIds, onSelect, onSelectAll, onCo
         >
           {collapsed ? <ChevronRight className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
           <span className="font-semibold text-sm">{label}</span>
-          <span className="text-xs text-muted-foreground bg-background border border-border rounded-full px-2 py-0.5 leading-none">
+          <span className="text-xs text-muted-foreground bg-card border border-border rounded-full px-2 py-0.5 leading-none">
             {tasks.length}
           </span>
         </button>
@@ -306,7 +307,7 @@ TaskGroup.displayName = 'TaskGroup';
 const TasksSkeleton = () => (
   <div className="space-y-4">
     {[3, 2, 4].map((count, gi) => (
-      <div key={gi} className="rounded-lg border border-border overflow-hidden">
+      <div key={gi} className="rounded-xl border border-border/80 bg-card shadow-sm overflow-hidden">
         <div className="px-4 py-2.5 bg-muted/40"><Skeleton className="h-4 w-32" /></div>
         {Array.from({ length: count }).map((_, ti) => (
           <div key={ti} className="flex gap-3 px-4 py-3 border-b border-border/50 last:border-0">
@@ -635,25 +636,21 @@ export default function Tasks() {
     <div className="flex flex-col h-full overflow-hidden">
       {/* Sticky header */}
       <div className="sticky top-0 z-10 bg-background border-b border-border">
-        <div className="px-4 md:px-6 pt-4 md:pt-6 pb-0">
+        <div className="px-4 md:px-6 lg:px-8 pt-4 md:pt-6 lg:pt-8 pb-0">
 
           {/* Title */}
-          <div className="flex items-center gap-3 mb-4">
-            <CheckSquare className="h-6 w-6 text-primary shrink-0" />
-            <h1 className="text-xl font-bold">Aufgaben</h1>
-            {!isLoading && (
-              <span className="text-xs text-muted-foreground bg-muted rounded-full px-2.5 py-0.5 font-medium">
-                {filteredTasks.length} {filteredTasks.length === 1 ? 'Aufgabe' : 'Aufgaben'}
-              </span>
-            )}
-          </div>
+          <PageHeader
+            className="mb-4"
+            title="Aufgaben"
+            description={isLoading ? undefined : `${filteredTasks.length} ${filteredTasks.length === 1 ? 'Aufgabe' : 'Aufgaben'} gefunden`}
+          />
 
           {/* Primary filters */}
           <div className="flex flex-wrap gap-2 mb-2">
             <div className="relative flex-1 min-w-[200px] max-w-xs">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
               <Input
-                className="pl-9 h-9"
+                className="pl-9 h-11 sm:h-9"
                 placeholder="Titel, Zuständige, Auditor, Kunde..."
                 value={searchQuery}
                 onChange={e => setSearch(e.target.value)}
@@ -775,7 +772,7 @@ export default function Tasks() {
       </div>
 
       {/* Scrollable content */}
-      <div ref={scrollRef} className={cn('flex-1 overflow-auto p-4 md:p-6 transition-opacity duration-150', isPending && 'opacity-50')}>
+      <div ref={scrollRef} className={cn('flex-1 overflow-auto p-4 md:p-6 lg:px-8 transition-opacity duration-150', isPending && 'opacity-50')}>
         {isLoading ? <TasksSkeleton /> : filteredTasks.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <CheckSquare className="h-14 w-14 text-muted-foreground/20 mb-4" />

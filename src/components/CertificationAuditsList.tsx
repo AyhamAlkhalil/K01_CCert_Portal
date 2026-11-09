@@ -59,14 +59,14 @@ const getStatusBadge = (status: string) => {
       );
     case 'in-progress':
       return (
-        <Badge className="gap-1 bg-blue-500">
+        <Badge className="gap-1 bg-info/10 text-info border-info/20">
           <AlertCircle className="h-3 w-3" />
           In Bearbeitung
         </Badge>
       );
     case 'completed':
       return (
-        <Badge className="gap-1 bg-green-500">
+        <Badge className="gap-1 bg-success/10 text-success border-success/20">
           <CheckCircle className="h-3 w-3" />
           Abgeschlossen
         </Badge>
@@ -86,9 +86,9 @@ const getStatusBadge = (status: string) => {
 const getAuditTypeBadge = (type: string) => {
   const label = AUDIT_TYPE_LABELS[type as keyof typeof AUDIT_TYPE_LABELS] || type;
   const colors: Record<string, string> = {
-    'initial': 'bg-purple-500/10 text-purple-700 border-purple-500/30',
-    'surveillance': 'bg-amber-500/10 text-amber-700 border-amber-500/30',
-    'recertification': 'bg-emerald-500/10 text-emerald-700 border-emerald-500/30',
+    'initial': 'bg-violet-500/10 text-violet-700 border-violet-500/20',
+    'surveillance': 'bg-amber-500/10 text-amber-800 border-amber-500/20',
+    'recertification': 'bg-success/10 text-success border-success/20',
     'six-month': 'bg-cyan-500/10 text-cyan-700 border-cyan-500/30',
   };
 

@@ -102,7 +102,7 @@ export const DataQualityWarningsCard = () => {
       <Card>
         <CardHeader className="pb-2">
           <CardTitle className="flex items-center gap-2 text-base">
-            <AlertTriangle className="h-4 w-4 text-amber-500" />
+            <AlertTriangle className="h-4 w-4 text-warning" />
             Datenqualität
           </CardTitle>
         </CardHeader>
@@ -120,16 +120,16 @@ export const DataQualityWarningsCard = () => {
       <CardHeader className="pb-2">
         <CardTitle className="flex items-center justify-between text-base">
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-4 w-4 text-amber-500" />
+            <AlertTriangle className="h-4 w-4 text-warning" />
             Datenqualität
           </div>
           <div className="flex gap-1.5">
             {stats.missingBoth > 0 && (
-              <Badge variant="destructive" className="text-[10px] px-1.5 py-0">
+              <Badge variant="destructive" className="text-[11px] px-2 py-0 font-medium">
                 {stats.missingBoth} kritisch
               </Badge>
             )}
-            <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+            <Badge variant="secondary" className="text-[11px] px-2 py-0 font-medium">
               {stats.total} gesamt
             </Badge>
           </div>
@@ -140,10 +140,10 @@ export const DataQualityWarningsCard = () => {
           <Table>
             <TableHeader>
               <TableRow className="hover:bg-transparent">
-                <TableHead className="text-xs h-8 w-8 px-2"></TableHead>
-                <TableHead className="text-xs h-8">Kunde</TableHead>
-                <TableHead className="text-xs h-8">Zertifikat</TableHead>
-                <TableHead className="text-xs h-8 text-right">Problem</TableHead>
+                <TableHead className="h-9 w-8 px-2"></TableHead>
+                <TableHead className="h-9">Kunde</TableHead>
+                <TableHead className="h-9">Zertifikat</TableHead>
+                <TableHead className="h-9 text-right">Problem</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -153,8 +153,7 @@ export const DataQualityWarningsCard = () => {
                 return (
                   <TableRow
                     key={issue.id}
-                    className={`cursor-pointer text-xs ${issue.type === 'missing_both' ? 'bg-destructive/[0.04]' : ''
-                      }`}
+                    className={`cursor-pointer text-[13px] ${issue.type === 'missing_both' ? 'bg-destructive/[0.04]' : ''}`}
                     onClick={() => navigate(`/certifications/${issue.clientCertificationId}`)}
                   >
                     <TableCell className="py-2 px-2 w-8">
@@ -167,7 +166,7 @@ export const DataQualityWarningsCard = () => {
                       {issue.certificationName}
                     </TableCell>
                     <TableCell className="py-2 text-right">
-                      <Badge variant={config.badgeVariant} className="text-[10px] px-1.5 py-0">
+                      <Badge variant={config.badgeVariant} className="text-[11px] px-2 py-0">
                         {config.label}
                       </Badge>
                     </TableCell>

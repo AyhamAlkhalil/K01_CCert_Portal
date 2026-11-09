@@ -337,10 +337,10 @@ function ClientSequenceCard({
 }
 
 const STATUS_OPTIONS = [
-  { value: 'active', label: 'Aktiv', color: 'bg-green-500' },
-  { value: 'pending', label: 'Ausstehend', color: 'bg-yellow-500' },
-  { value: 'expired', label: 'Abgelaufen', color: 'bg-red-500' },
-  { value: 'suspended', label: 'Ausgesetzt', color: 'bg-orange-500' },
+  { value: 'active', label: 'Aktiv', color: 'bg-success' },
+  { value: 'pending', label: 'Ausstehend', color: 'bg-amber-500' },
+  { value: 'expired', label: 'Abgelaufen', color: 'bg-destructive' },
+  { value: 'suspended', label: 'Ausgesetzt', color: 'bg-warning' },
 ];
 
 const CertificationDetailSkeleton = () => (
@@ -506,11 +506,11 @@ const CertificationDetail = () => {
     if (!statusOption) return null;
 
     const colorMap: Record<string, string> = {
-      active: 'bg-green-100 text-green-800 border-green-300',
-      valid: 'bg-green-100 text-green-800 border-green-300',
-      suspended: 'bg-orange-100 text-orange-800 border-orange-300',
-      expired: 'bg-red-100 text-red-800 border-red-300',
-      pending: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+      active: 'bg-success/10 text-success border-success/20',
+      valid: 'bg-success/10 text-success border-success/20',
+      suspended: 'bg-warning/10 text-warning border-warning/20',
+      expired: 'bg-destructive/10 text-destructive border-destructive/20',
+      pending: 'bg-amber-500/10 text-amber-800 border-amber-500/20',
     };
 
     return (
@@ -556,7 +556,7 @@ const CertificationDetail = () => {
 
   return (
     <>
-      <div className="p-4 sm:p-8 space-y-4 sm:space-y-6 animate-fade-in">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
           <div className="flex items-center gap-3 flex-1 min-w-0">
@@ -569,12 +569,12 @@ const CertificationDetail = () => {
             >
               <ArrowLeft className="h-4 w-4" />
             </Button>
-            <div className="hidden sm:block p-2 bg-primary/10 rounded-lg shrink-0">
-              <Award className="h-8 w-8 text-primary" />
+            <div className="hidden sm:flex h-12 w-12 items-center justify-center bg-primary/[0.08] rounded-xl shrink-0">
+              <Award className="h-6 w-6 text-primary" />
             </div>
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
-                <h1 className="text-xl sm:text-3xl font-bold text-foreground">{certName}</h1>
+                <h1 className="font-display text-[26px] font-medium leading-tight tracking-[-0.01em] text-foreground sm:text-[30px]">{certName}</h1>
                 {getStatusBadge(certification.status || 'active')}
               </div>
               {client && (
@@ -661,7 +661,7 @@ const CertificationDetail = () => {
                         <SelectTrigger id="status">
                           <SelectValue placeholder="Status auswählen" />
                         </SelectTrigger>
-                        <SelectContent className="bg-background border shadow-lg z-50">
+                        <SelectContent>
                           {STATUS_OPTIONS.map((opt) => (
                             <SelectItem key={opt.value} value={opt.value}>
                               {opt.label}
@@ -676,7 +676,7 @@ const CertificationDetail = () => {
                         <SelectTrigger id="auditor">
                           <SelectValue placeholder="Auditor auswählen" />
                         </SelectTrigger>
-                        <SelectContent className="bg-background border shadow-lg z-50">
+                        <SelectContent>
                           <SelectItem value="none">Kein Auditor</SelectItem>
                           {auditors.map((auditor) => (
                             <SelectItem key={auditor.id} value={auditor.id}>
@@ -693,7 +693,7 @@ const CertificationDetail = () => {
                         <SelectTrigger id="cert-body">
                           <SelectValue placeholder="Zertifizierer auswählen" />
                         </SelectTrigger>
-                        <SelectContent className="bg-background border shadow-lg z-50">
+                        <SelectContent>
                           <SelectItem value="none">Kein Zertifizierer</SelectItem>
                           {certificationBodies.map((body) => (
                             <SelectItem key={body.id} value={body.id}>
@@ -761,7 +761,7 @@ const CertificationDetail = () => {
                     </div>
                     {/* Auditor display */}
                     <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                      <User className="h-5 w-5 text-amber-600" />
+                      <User className="h-5 w-5 text-warning" />
                       <div className="flex-1">
                         <p className="text-sm text-muted-foreground">Auditor</p>
                         {(() => {

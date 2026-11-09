@@ -43,6 +43,7 @@ import {
 } from '@/components/ui/table';
 import { Plus, Pencil, Trash2, Search, User, Building2, Mail, Phone } from 'lucide-react';
 import { toast } from 'sonner';
+import { PageHeader } from '@/components/PageHeader';
 import { formatAuditorName, sortAuditorsByLastName } from '@/lib/auditorUtils';
 
 const Auditors = () => {
@@ -146,18 +147,17 @@ const Auditors = () => {
 
   return (
     <>
-      <div className="p-4 sm:p-8 space-y-4 sm:space-y-6">
-        {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Auditoren</h1>
-            <p className="text-muted-foreground text-sm font-medium">{auditors.length} Einträge im System</p>
-          </div>
-          <Button size="lg" className="w-full sm:w-auto shadow-sm" onClick={openCreateDialog}>
-            <Plus className="h-5 w-5 mr-2" />
-            Neuer Auditor
-          </Button>
-        </div>
+      <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 animate-fade-in">
+        <PageHeader
+          title="Auditoren"
+          description={`${auditors.length} Einträge im System`}
+          actions={
+            <Button className="w-full sm:w-auto" onClick={openCreateDialog}>
+              <Plus className="h-4 w-4" />
+              Neuer Auditor
+            </Button>
+          }
+        />
 
         {/* Search */}
         <div className="relative w-full sm:max-w-md">
@@ -166,7 +166,7 @@ const Auditors = () => {
             placeholder="Suchen nach Name, Zertifizierer..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 h-11 sm:h-10 bg-background/50 border-border/60 focus:bg-background transition-all"
+            className="pl-10 h-11 sm:h-10"
           />
         </div>
 
